@@ -1,11 +1,11 @@
 ---
-title: Intern Engineering Handbook V4
+title: Intern Engineering Handbook
 layout: home
 ---
 
-# Intern Engineering Handbook V4
+# Intern Engineering Handbook
 
-Welcome to the **Intern Engineering Handbook V4** — a practical, hands-on guide to becoming a productive member of a real engineering team.
+Welcome to the **Intern Engineering Handbook** — a practical, hands-on guide to becoming a productive member of a real engineering team.
 
 This handbook is not something to read once. It is something to **revisit, practice, and apply daily**.
 

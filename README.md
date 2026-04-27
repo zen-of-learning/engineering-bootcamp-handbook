@@ -1,4 +1,4 @@
-# Intern Engineering Handbook V4
+# Intern Engineering Handbook
 
 A practical, full-stack engineering onboarding handbook for interns.
 
