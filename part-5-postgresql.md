@@ -190,7 +190,20 @@ finally:
 
 ---
 
-## 9. Debugging the Database
+## 9. Database Safety Rules
+
+These rules apply to every backend service that writes to a database:
+
+- Use parameterized queries; never build SQL by concatenating user input
+- Commit successful writes and roll back failed transactions
+- Close connections in a `finally` block or use a connection pool/context manager
+- Keep credentials in environment variables
+- Return safe API errors; do not expose raw database exceptions
+- Verify persistence by restarting containers and querying the table directly
+
+---
+
+## 10. Debugging the Database
 
 Access the database shell inside Docker:
 
@@ -209,7 +222,7 @@ Useful psql commands:
 
 ---
 
-## 10. Mini Project
+## 11. Mini Project
 
 1. Create the `users` table in PostgreSQL.
 2. Update `create_user` in your service to insert into the real database.
@@ -235,6 +248,7 @@ Useful psql commands:
 | psycopg2 | Python library for connecting to PostgreSQL |
 | Docker host | Use service name `db`, not `localhost`, inside Docker Compose |
 | Connection handling | Always close connections in a `finally` block |
+| SQL safety | Use parameterized queries and safe error handling |
 
 ---
 

@@ -1,6 +1,6 @@
-# Part 8 — Full End-to-End Project
+# Part 8 — Backend Capstone Project
 
-> **Goal:** Build a complete, working full-stack system from scratch: Next.js frontend, FastAPI backend, PostgreSQL database, and Docker Compose orchestration.
+> **Goal:** Build a complete, working API-backed system from scratch: FastAPI backend, PostgreSQL database, Docker Compose orchestration, and a small client to verify end-to-end behavior.
 
 ---
 
@@ -432,7 +432,21 @@ Verify:
 
 ---
 
-## 10. Deliverables
+## 10. Delivery Checklist
+
+Before opening the PR, verify the system from a clean checkout:
+
+- `docker compose up --build` starts all services
+- `GET /` returns a health response
+- `POST /users` creates a user and returns `201`
+- `GET /users` returns persisted users from PostgreSQL
+- Restarting containers does not delete user data
+- Invalid input returns a clear client error
+- Logs do not expose secrets
+
+---
+
+## 11. Deliverables
 
 You must deliver:
 
@@ -441,10 +455,11 @@ You must deliver:
 - [ ] Database that persists users across restarts
 - [ ] Full system runs with `docker compose up --build`
 - [ ] Code in a Git repository with a feature branch and PR
+- [ ] PR description includes test evidence and any known limitations
 
 ---
 
-## 11. Evaluation Criteria
+## 12. Evaluation Criteria
 
 | Area | What is assessed |
 |------|-----------------|
@@ -453,6 +468,7 @@ You must deliver:
 | **Code structure** | Are routes, services, schemas, and DB separated correctly? |
 | **Docker** | Does `docker compose up --build` start everything cleanly? |
 | **Git** | Was the work done in a branch? Is there a PR? Are commit messages meaningful? |
+| **Verification** | Did the PR show how the work was tested? |
 
 ---
 

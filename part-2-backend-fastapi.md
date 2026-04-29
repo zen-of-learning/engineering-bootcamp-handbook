@@ -211,7 +211,21 @@ def get_user(user_id: int):
 
 ---
 
-## 11. Mini Project
+## 11. Backend Quality Checklist
+
+Before you call an API endpoint done, verify:
+
+- Inputs are validated with Pydantic schemas
+- Successful creates return `201 Created`
+- Not-found cases return `404 Not Found`
+- Invalid requests return `400 Bad Request` or `422 Unprocessable Entity`
+- Internal errors do not leak raw database details to the client
+- Route handlers stay thin; business logic lives in services
+- Configuration comes from environment variables, not hardcoded secrets
+
+---
+
+## 12. Mini Project
 
 Build an in-memory user API:
 
@@ -222,7 +236,7 @@ Start with an in-memory list. Replace with PostgreSQL in Part 5.
 
 ---
 
-## 12. Common Backend Mistakes
+## 13. Common Backend Mistakes
 
 | Mistake | Problem | Fix |
 |---------|---------|-----|
@@ -234,7 +248,7 @@ Start with an in-memory list. Replace with PostgreSQL in Part 5.
 
 ---
 
-## 13. Debugging Backend
+## 14. Debugging Backend
 
 | Tool | How to use it |
 |------|--------------|
@@ -262,6 +276,7 @@ Start with an in-memory list. Replace with PostgreSQL in Part 5.
 | FastAPI | Automatic validation, auto-generated docs at `/docs` |
 | Pydantic | Define input/output schemas with type hints |
 | Error handling | Always use `HTTPException` with correct status codes |
+| Delivery quality | Validate inputs, hide internals, keep routes thin |
 
 ---
 

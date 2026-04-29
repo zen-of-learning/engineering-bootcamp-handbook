@@ -1,6 +1,6 @@
-# Intern Engineering Handbook
+# Backend Engineering Bootcamp Handbook
 
-A practical, full-stack engineering onboarding handbook for interns.
+A practical backend-focused engineering onboarding handbook for interns.
 
 Published as a GitHub Pages documentation site at **[https://indapmgr.github.io/engineering-bootcamp-handbook/](https://indapmgr.github.io/engineering-bootcamp-handbook/)**.
 
@@ -12,12 +12,12 @@ Published as a GitHub Pages documentation site at **[https://indapmgr.github.io/
 |------|-------|
 | [Part 1](part-1-foundations.md) | Foundations |
 | [Part 2](part-2-backend-fastapi.md) | Backend: FastAPI |
-| [Part 3](part-3-frontend-nextjs.md) | Frontend: Next.js + API Integration |
+| [Part 3](part-3-frontend-nextjs.md) | API Client Integration |
 | [Part 4](part-4-docker.md) | Docker + Docker Compose |
 | [Part 5](part-5-postgresql.md) | PostgreSQL + Database Integration |
 | [Part 6](part-6-debugging.md) | Debugging |
 | [Part 7](part-7-advanced-git.md) | Advanced Git |
-| [Part 8](part-8-full-project.md) | Full End-to-End Project |
+| [Part 8](part-8-full-project.md) | Backend Capstone Project |
 | [Part 9](part-9-final-evaluation.md) | Final Evaluation, Readiness, and Expectations |
 
 ---
@@ -53,6 +53,8 @@ Being ready does **not** mean finishing tutorials.
 Being ready means:
 
 > You can take a task, understand it, break it down, implement it, debug it, and deliver it independently.
+
+For this bootcamp, "deliver" means a working backend service with clear APIs, persistent data, containerized local setup, and a pull request that another engineer can review.
 
 ---
 

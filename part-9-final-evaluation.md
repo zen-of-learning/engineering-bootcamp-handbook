@@ -44,6 +44,7 @@ You **must** be able to:
 - Persist data in the database
 - Use Docker Compose
 - Debug failures
+- Explain how you verified the service works
 
 ### Git Skills
 
@@ -262,12 +263,19 @@ Ask yourself:
 - Is the structure clean and properly separated?
 - Is validation present?
 - Is the logic readable?
+- Are secrets and configuration handled safely?
 
 ### Debugging
 
 - Did I test failure cases (wrong input, missing data)?
 - Did I check logs?
 - Did I verify the fix works end-to-end?
+
+### Delivery
+
+- Does the PR explain what changed and why?
+- Does the PR include exact verification steps?
+- Are any limitations or follow-up tasks called out clearly?
 
 ---
 
@@ -302,6 +310,7 @@ If you can:
 - Debug issues independently
 - Use Git correctly with branches and PRs
 - Run a Docker Compose setup
+- Show evidence that your work was tested
 
 Then:
 

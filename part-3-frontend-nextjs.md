@@ -1,6 +1,6 @@
-# Part 3 — Frontend: Next.js + API Integration
+# Part 3 — API Client Integration
 
-> **Golden rule:** The frontend never talks to the database directly. It only talks to backend APIs.
+> **Golden rule:** A client never talks to the database directly. It only talks to backend APIs.
 
 ---
 
@@ -10,9 +10,9 @@
 
 ---
 
-## 1. Frontend Thinking
+## 1. Client Integration Thinking
 
-The frontend is responsible for what the user sees and interacts with.
+This part uses a small Next.js frontend as a client for your backend. The goal is not to become a frontend specialist; the goal is to prove your API works from outside the backend process.
 
 **Responsibilities:**
 
@@ -21,7 +21,7 @@ The frontend is responsible for what the user sees and interacts with.
 | **State** | Track data that changes over time (user input, API responses) |
 | **Interaction** | Handle button clicks, form submissions, and user events |
 | **API communication** | Fetch data from and send data to the backend |
-| **Rendering** | Display data to the user |
+| **Rendering** | Display API data to the user |
 
 ### Frontend Request Flow
 
@@ -292,7 +292,7 @@ Build a user management page:
 
 | Concept | Key Takeaway |
 |---------|-------------|
-| Golden rule | Frontend never talks to DB — only to backend APIs |
+| Golden rule | Clients never talk to DB — only to backend APIs |
 | State | Use `useState` to track data that changes |
 | API service | Put all `fetch` calls in one service file |
 | Async/await | Always `await` API calls inside `async` functions |
