@@ -26,9 +26,9 @@ By the end of this handbook you will be able to:
 
 | Part | Title | Topics |
 |------|-------|--------|
-| [Part 1](part-1-foundations) | 🔧 **Foundations** | Environment setup, Git basics, HTTP & APIs |
+| [Part 1](part-1-development-environment) | 🔧 **Development Environment & Foundations** | Full dev environment setup (IDE, Python, Git, Docker), venv, Hello World, Git basics, HTTP & APIs |
 | [Part 2](part-2-backend-fastapi) | ⚡ **Backend: FastAPI** | Project structure, routes, schemas, services, database |
-| [Part 3](part-3-frontend-nextjs) | 🐍 **Virtualenv & API Testing** | Virtual environments, pip, requests, weekly demo workflow |
+| [Part 3](part-3-virtualenv-api-testing) | 🐍 **Virtualenv & API Testing** | Virtual environments, pip, requests, weekly demo workflow |
 | [Part 4](part-4-docker) | 🐳 **Docker + Docker Compose** | Images, containers, Dockerfile, Compose |
 | [Part 5](part-5-postgresql) | 🗄️ **PostgreSQL + Database Integration** | SQL basics, psycopg2, queries |
 | [Part 6](part-6-debugging) | 🔍 **Debugging** | Framework, scenarios, tools, mindset |
@@ -60,7 +60,7 @@ Backend readiness means you can explain API contracts, data persistence, error h
 
 ## ▶️ Start Here
 
-**[→ Part 1: Foundations](part-1-foundations)**
+**[→ Part 1: Development Environment & Foundations](part-1-development-environment)**
 
 ---
 

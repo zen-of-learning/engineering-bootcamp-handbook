@@ -6,7 +6,7 @@
 
 ## Navigation
 
-[← Part 1: Foundations](part-1-foundations) | [Part 3: Virtualenv & Testing →](part-3-frontend-nextjs)
+[← Part 1: Development Environment](part-1-development-environment) | [Part 3: Virtualenv & Testing →](part-3-virtualenv-api-testing)
 
 ---
 
@@ -306,4 +306,4 @@ Start with an in-memory list. Replace with PostgreSQL in Part 5.
 
 ## Navigation
 
-[← Part 1: Foundations](part-1-foundations) | [Part 3: Virtualenv & Testing →](part-3-frontend-nextjs)
+[← Part 1: Development Environment](part-1-development-environment) | [Part 3: Virtualenv & Testing →](part-3-virtualenv-api-testing)

@@ -6,7 +6,7 @@
 
 ## Navigation
 
-[← Part 3: Virtualenv & Testing](part-3-frontend-nextjs) | [Part 5: PostgreSQL →](part-5-postgresql)
+[← Part 3: Virtualenv & Testing](part-3-virtualenv-api-testing) | [Part 5: PostgreSQL →](part-5-postgresql)
 
 ---
 
@@ -252,4 +252,4 @@ DB_PASS = os.getenv("DB_PASSWORD", "password")
 
 ## Navigation
 
-[← Part 3: Virtualenv & Testing](part-3-frontend-nextjs) | [Part 5: PostgreSQL →](part-5-postgresql)
+[← Part 3: Virtualenv & Testing](part-3-virtualenv-api-testing) | [Part 5: PostgreSQL →](part-5-postgresql)

@@ -10,9 +10,9 @@ Published as a GitHub Pages documentation site at **[https://indapmgr.github.io/
 
 | Part | Title |
 |------|-------|
-| [Part 1](part-1-foundations.md) | Foundations |
+| [Part 1](part-1-development-environment.md) | Development Environment & Foundations |
 | [Part 2](part-2-backend-fastapi.md) | Backend: FastAPI |
-| [Part 3](part-3-frontend-nextjs.md) | API Client Integration |
+| [Part 3](part-3-virtualenv-api-testing.md) | Virtualenv & API Testing |
 | [Part 4](part-4-docker.md) | Docker + Docker Compose |
 | [Part 5](part-5-postgresql.md) | PostgreSQL + Database Integration |
 | [Part 6](part-6-debugging.md) | Debugging |
@@ -65,9 +65,9 @@ engineering-bootcamp-handbook/
 ├── _config.yml                         # Jekyll / GitHub Pages configuration
 ├── README.md                           # This file
 ├── index.md                            # Handbook homepage
-├── part-1-foundations.md
+├── part-1-development-environment.md
 ├── part-2-backend-fastapi.md
-├── part-3-frontend-nextjs.md
+├── part-3-virtualenv-api-testing.md
 ├── part-4-docker.md
 ├── part-5-postgresql.md
 ├── part-6-debugging.md
