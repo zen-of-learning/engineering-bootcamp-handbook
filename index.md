@@ -26,7 +26,7 @@ By the end of this handbook you will be able to:
 
 | Part | Title | Topics |
 |------|-------|--------|
-| [Part 1](part-1-foundations) | 🔧 **Foundations** | Environment setup, Git basics, HTTP & APIs |
+| [Part 1](part-1-foundations) | 🔧 **Foundations** | Full dev environment setup (IDE, Python, Git, Docker), venv, Hello World, Git basics, HTTP & APIs |
 | [Part 2](part-2-backend-fastapi) | ⚡ **Backend: FastAPI** | Project structure, routes, schemas, services, database |
 | [Part 3](part-3-frontend-nextjs) | 🐍 **Virtualenv & API Testing** | Virtual environments, pip, requests, weekly demo workflow |
 | [Part 4](part-4-docker) | 🐳 **Docker + Docker Compose** | Images, containers, Dockerfile, Compose |

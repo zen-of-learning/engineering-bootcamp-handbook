@@ -29,25 +29,37 @@ your-machine/
 
 No conflicts. Each project stays clean and independent.
 
+> **Full setup instructions:** If you haven't set up your development environment yet, go through [Part 1 — Section 1.9: Create and Activate a Virtual Environment](part-1-foundations) first. It covers creating, activating, and troubleshooting venvs on Windows, Mac, and Linux with detailed error guidance.
+
 ---
 
-## 2. Creating a Virtual Environment
+## 2. Quick Venv Reference
 
-Navigate into your project folder, then run:
+This is a quick-reference summary. For full details and troubleshooting, see [Part 1 — Foundations](part-1-foundations).
 
-**Mac / Linux:**
-
-```bash
-python3 -m venv venv
-```
-
-**Windows:**
+**Create (once per project):**
 
 ```bash
-python -m venv venv
+python3 -m venv venv    # Mac / Linux
+python -m venv venv     # Windows
 ```
 
-This creates a folder called `venv/` inside your project. You only need to do this **once** per project.
+**Activate (every new terminal session):**
+
+| OS | Command |
+|----|---------|
+| 🪟 Windows (PowerShell) | `venv\Scripts\Activate.ps1` |
+| 🪟 Windows (Command Prompt) | `venv\Scripts\activate.bat` |
+| 🪟 Windows (Git Bash) | `source venv/Scripts/activate` |
+| 🍎 Mac / 🐧 Linux | `source venv/bin/activate` |
+
+When active, `(venv)` appears at the start of your terminal prompt.
+
+**Deactivate:**
+
+```bash
+deactivate
+```
 
 > **Important:** Add `venv/` to your `.gitignore` file — never commit your virtual environment to Git. It is large and machine-specific.
 
@@ -62,56 +74,7 @@ __pycache__/
 
 ---
 
-## 3. Activating the Virtual Environment
-
-You must activate the venv **every time you open a new terminal window**. Without activating, you're using the global Python and your project packages won't be found.
-
-**Mac / Linux:**
-
-```bash
-source venv/bin/activate
-```
-
-**Windows (PowerShell):**
-
-```bash
-venv\Scripts\Activate.ps1
-```
-
-**Windows (Command Prompt / Git Bash):**
-
-```bash
-venv\Scripts\activate
-```
-
-When active, your terminal prompt changes to show `(venv)` at the start:
-
-```text
-(venv) user@machine:~/my-project$
-```
-
-To deactivate (return to global Python):
-
-```bash
-deactivate
-```
-
----
-
-## 4. Common Virtualenv Problems
-
-| Problem | Cause | Fix |
-|---------|-------|-----|
-| `No such file or directory: venv/bin/activate` | venv not created yet | Run `python3 -m venv venv` first |
-| `python: command not found` | Python not installed or wrong command | Try `python3` on Mac/Linux, or install Python on Windows |
-| `Activate.ps1 cannot be loaded` (Windows PowerShell) | Execution policy blocked scripts | Run: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` |
-| Packages not found after install | venv not activated | Activate it first: `source venv/bin/activate` |
-| Wrong Python version in venv | System Python is 2.x or old | Specify: `python3.11 -m venv venv` |
-| `pip: command not found` | pip not available | Try `python -m pip install ...` instead |
-
----
-
-## 5. Installing Packages
+## 3. Installing Packages
 
 With your venv active, install a package:
 
@@ -141,7 +104,7 @@ pip install -r requirements.txt
 
 ---
 
-## 6. Full Project Setup Workflow
+## 4. Full Project Setup Workflow
 
 Every time you start a new project, follow this sequence:
 
@@ -168,7 +131,7 @@ pip freeze > requirements.txt
 
 ---
 
-## 7. Testing Your API with Python
+## 5. Testing Your API with Python
 
 Instead of opening a browser, you can test your FastAPI endpoints with a simple Python script using the `requests` library. This is a standard backend technique.
 
@@ -233,7 +196,7 @@ Testing GET /users...
 
 ---
 
-## 8. Testing Error Cases
+## 6. Testing Error Cases
 
 A good test also checks what happens when things go wrong:
 
@@ -261,7 +224,7 @@ print(f"  Body:   {response.json()}")        # Expect a validation error message
 
 ---
 
-## 9. Testing with a Connection-Error Guard
+## 7. Testing with a Connection-Error Guard
 
 If the server is not running, your test script will crash. Add a guard:
 
@@ -285,7 +248,7 @@ except requests.exceptions.Timeout:
 
 ---
 
-## 10. Weekly Demo Workflow
+## 8. Weekly Demo Workflow
 
 Every week you will build something new, test it, and demo it to the team.
 
@@ -316,7 +279,7 @@ Write a short reflection (a few sentences is fine):
 
 ---
 
-## 11. Mini Project
+## 9. Mini Project
 
 1. Create a Python virtual environment for your FastAPI project.
 2. Install `fastapi`, `uvicorn`, and `requests`.
