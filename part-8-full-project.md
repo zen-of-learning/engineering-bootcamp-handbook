@@ -333,7 +333,7 @@ volumes:
 **`test_api.py`**
 
 ```python
-import requests   # pip install requests
+import requests   # install with pip (Windows) or pip3 (Mac/Linux)
 
 BASE_URL = "http://localhost:8000"
 

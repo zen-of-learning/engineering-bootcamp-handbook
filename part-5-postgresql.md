@@ -100,7 +100,8 @@ DELETE FROM users WHERE id = 1;
 Install the PostgreSQL driver:
 
 ```bash
-pip install psycopg2-binary
+pip install psycopg2-binary    # Windows
+pip3 install psycopg2-binary   # Mac / Linux
 ```
 
 Add it to `requirements.txt`:
@@ -248,12 +249,196 @@ Useful psql commands:
 
 ---
 
-## 11. Mini Project
+## 11. pgAdmin — GUI Tool for PostgreSQL
+
+**pgAdmin** is a free, open-source graphical interface for PostgreSQL. Instead of typing SQL commands in a terminal, you can browse your databases, tables, and data through a visual interface. It is especially useful for beginners and for exploring schemas.
+
+**Download:** [pgadmin.org/download](https://www.pgadmin.org/download/)
+
+### Installing pgAdmin
+
+<details markdown="1">
+<summary>🪟 Windows</summary>
+
+1. Go to [pgadmin.org/download/pgadmin-4-windows](https://www.pgadmin.org/download/pgadmin-4-windows/).
+2. Download the latest Windows installer (`.exe`).
+3. Run the installer — accept all defaults.
+4. Launch pgAdmin 4 from the Start menu.
+5. On first launch, pgAdmin asks you to set a **master password** — this protects your saved server connections. Set something you will remember.
+
+> pgAdmin opens as a web application in your default browser (it starts a local server at `http://127.0.0.1:PORT`). This is normal.
+
+</details>
+
+<details markdown="1">
+<summary>🍎 Mac</summary>
+
+1. Go to [pgadmin.org/download/pgadmin-4-macos](https://www.pgadmin.org/download/pgadmin-4-macos/).
+2. Download the latest `.dmg` file.
+3. Open the `.dmg` and drag **pgAdmin 4** into the **Applications** folder.
+4. Open pgAdmin 4 from Applications.
+5. macOS may show a security warning — go to **System Settings → Privacy & Security** and click **Open Anyway**.
+6. Set your master password on first launch.
+
+</details>
+
+<details markdown="1">
+<summary>🐧 Linux (Ubuntu/Debian)</summary>
+
+```bash
+# Add the pgAdmin APT repository
+curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
+
+sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
+
+# Update and install pgAdmin desktop + web
+sudo apt update
+sudo apt install pgadmin4-desktop -y
+```
+
+Launch pgAdmin 4 from your application menu or run `pgadmin4` in the terminal.
+
+</details>
+
+---
+
+### Connecting pgAdmin to Your Docker PostgreSQL Instance
+
+Your PostgreSQL database runs inside a Docker container (see Part 4). To connect pgAdmin to it, you need to expose the container's port to your local machine.
+
+> **Check your `docker-compose.yml`** — the `db` service should have this port mapping. If it doesn't, add it:
+
+```yaml
+db:
+  image: postgres:15
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: password
+    POSTGRES_DB: appdb
+  ports:
+    - "5432:5432"   # ← Add this line to expose Postgres to your local machine
+  volumes:
+    - postgres_data:/var/lib/postgresql/data
+```
+
+After updating the file, restart Docker Compose:
+
+```bash
+docker compose down
+docker compose up --build
+```
+
+#### Add a Server in pgAdmin
+
+1. Open pgAdmin.
+2. In the left panel (**Browser**), right-click **Servers** → **Register** → **Server…**
+3. In the **General** tab:
+   - **Name:** `Docker Postgres` (any label you like)
+4. In the **Connection** tab:
+   - **Host name/address:** `localhost`
+   - **Port:** `5432`
+   - **Maintenance database:** `appdb`
+   - **Username:** `postgres`
+   - **Password:** `password`
+   - Tick **Save password** so you don't have to retype it
+5. Click **Save**.
+
+The server appears in the Browser panel. Expand it: **Servers → Docker Postgres → Databases → appdb**.
+
+---
+
+### Creating a Schema and Table in pgAdmin
+
+#### What is a Schema?
+
+A **schema** is a namespace inside a database. It groups related tables together. The default schema in PostgreSQL is `public` — you can use that for all exercises.
+
+#### Create a Table Using the Query Tool
+
+1. In the Browser panel, expand **Databases → appdb**.
+2. Click the **Query Tool** button (the toolbar icon that looks like a lightning bolt ⚡), or go to **Tools → Query Tool**.
+3. A SQL editor opens. Paste this SQL:
+
+```sql
+-- Create the users table if it doesn't already exist
+CREATE TABLE IF NOT EXISTS users (
+    id    SERIAL PRIMARY KEY,            -- Auto-incrementing unique ID
+    name  VARCHAR(100) NOT NULL,         -- Required name field
+    email VARCHAR(255) UNIQUE NOT NULL,  -- Email must be unique
+    age   INTEGER                        -- Optional integer
+);
+```
+
+4. Click the **▶ Execute** button (or press `F5`).
+5. The Output panel at the bottom shows `CREATE TABLE` — success!
+
+#### View the Table
+
+In the Browser panel: **Databases → appdb → Schemas → public → Tables → users**
+
+Right-click `users` → **View/Edit Data → All Rows** — an interactive grid shows all rows (currently empty).
+
+---
+
+### Running SQL Commands in pgAdmin (CRUD)
+
+Use the **Query Tool** (⚡ button) to run SQL directly. These are the four core CRUD operations.
+
+#### Create — Insert Data
+
+```sql
+-- Insert a new user
+INSERT INTO users (name, email, age)
+VALUES ('Alice', 'alice@example.com', 28);
+```
+
+Run with `F5`. The Output panel shows `INSERT 0 1` — one row inserted.
+
+#### Read — Query Data
+
+```sql
+-- Return all users
+SELECT * FROM users;
+```
+
+The **Data Output** tab at the bottom shows a table with your row.
+
+```sql
+-- Filter by age
+SELECT * FROM users WHERE age > 20;
+```
+
+#### Update — Change Existing Data
+
+```sql
+-- Change Alice's name (always use WHERE — without it, every row is updated!)
+UPDATE users SET name = 'Alice Smith' WHERE id = 1;
+```
+
+Output: `UPDATE 1` — one row was modified.
+
+#### Delete — Remove Data
+
+```sql
+-- Remove the user with id = 1 (always use WHERE — without it, all rows are deleted!)
+DELETE FROM users WHERE id = 1;
+```
+
+Output: `DELETE 1` — one row removed.
+
+> **Quick tip:** After any write operation (INSERT/UPDATE/DELETE), run `SELECT * FROM users;` to confirm the change happened.
+
+---
+
+## 12. Mini Project
 
 1. Create the `users` table in PostgreSQL using the `CREATE TABLE` SQL above.
 2. Update `create_user` in your service to insert into the real database.
 3. Update `get_users` to query from the database.
 4. Verify data persists: stop and restart the containers, confirm users are still there.
+5. Install pgAdmin (section 11), connect it to your Docker PostgreSQL instance, and view the `users` table in the GUI.
+
+> **📌 Push to GitHub when done.** See [Part 1 — section 1.11](part-1-development-environment#111-initialize-your-demo-project-and-push-to-github) for the push guide.
 
 ---
 
@@ -275,6 +460,7 @@ Useful psql commands:
 | Docker host | Use service name `db`, not `localhost`, inside Docker Compose |
 | Connection handling | Always close connections in a `finally` block |
 | SQL safety | Use parameterised queries — never concatenate user input into SQL |
+| pgAdmin | GUI tool for browsing and querying your PostgreSQL database |
 
 ---
 

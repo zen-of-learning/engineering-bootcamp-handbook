@@ -258,6 +258,97 @@ Git is the tool that tracks every change you make to your code. It lets you go b
 
 **Download:** [git-scm.com](https://git-scm.com/)
 
+---
+
+### 1.5a Sign Up for a GitHub Account
+
+GitHub is the platform where your code lives online. Think of it as a combination of a cloud backup for your code and a social network for developers. You will push your projects here so the team can see your work, review it, and collaborate with you.
+
+#### Create Your Account
+
+1. Go to [github.com](https://github.com/) and click **Sign up**.
+2. Enter your email address and click **Continue**.
+3. Create a password (use something strong — at least 12 characters).
+4. Choose a username. This will appear on all your commits and repos — keep it professional (e.g., `jane-smith` or `jsmith-dev`).
+5. Complete the verification puzzle, then check your email for the verification code.
+6. On the "Welcome to GitHub" screen, you can skip or answer the questions about your use — click **Continue** until you reach the dashboard.
+
+> **You're in!** Your GitHub dashboard is at `github.com/<your-username>`.
+
+---
+
+#### Connect Git on Your Machine to GitHub
+
+After installing Git (section 1.5), you need to authenticate so GitHub accepts your pushes. The most secure method is **Personal Access Tokens (PAT)**.
+
+##### Step 1 — Set your identity in Git
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
+
+> Use the same email address you signed up to GitHub with — this links your commits to your account.
+
+##### Step 2 — Generate a Personal Access Token (PAT)
+
+A PAT is like a password for the terminal. GitHub no longer accepts your account password for Git operations.
+
+1. Log in to [github.com](https://github.com/).
+2. Click your profile photo (top-right) → **Settings**.
+3. In the left sidebar, scroll down and click **Developer settings**.
+4. Click **Personal access tokens** → **Tokens (classic)**.
+5. Click **Generate new token** → **Generate new token (classic)**.
+6. Give it a name (e.g., `My Laptop Token`).
+7. Set **Expiration** to 90 days (or `No expiration` for personal learning machines).
+8. Under **Scopes**, tick ✅ **repo** (this covers all repo operations you'll need).
+9. Click **Generate token**.
+10. **Copy the token immediately** — GitHub will not show it again.
+
+> **Save your token** in a password manager or a secure note. You will need it the first time you push from this machine.
+
+##### Step 3 — First Push (entering your token)
+
+The first time you run `git push`, Git will prompt you for credentials:
+
+<details markdown="1">
+<summary>🪟 Windows</summary>
+
+A dialog box called **Windows Credential Manager** will pop up. Enter:
+- Username: your GitHub username
+- Password: **paste your PAT** (not your account password)
+
+Git stores this securely — you won't be asked again on this machine.
+
+</details>
+
+<details markdown="1">
+<summary>🍎 Mac</summary>
+
+The macOS Keychain dialog will appear. Enter:
+- Username: your GitHub username
+- Password: **paste your PAT**
+
+macOS stores it in Keychain — you won't be prompted again.
+
+</details>
+
+<details markdown="1">
+<summary>🐧 Linux</summary>
+
+```bash
+# Enable credential caching so Git remembers for 1 hour
+git config --global credential.helper cache
+```
+
+The first push will prompt for username and password — enter your GitHub username and paste the PAT as the password.
+
+</details>
+
+> **Tip:** If you push and see `remote: Support for password authentication was removed`, it means you used your GitHub password instead of a PAT. Create a new PAT and use that.
+
+---
+
 <details markdown="1">
 <summary>🪟 Windows</summary>
 
@@ -648,25 +739,120 @@ Hello, world!
 
 ---
 
-### 1.11 Setup Checklist ✅
+### 1.11 Initialize Your Demo Project and Push to GitHub
+
+Now that your IDE is set up, your venv is active, and you have a working `hello.py`, it's time to put your project under version control and push it to GitHub. This is what you will do **every time** you start a new project or mini exercise.
+
+> **Why push to GitHub?** The team reviews your work from GitHub, not from your local machine. If it is not on GitHub, it does not exist from the team's perspective. Make it a habit — push early and push often.
+
+#### Step 1 — Create a `.gitignore` file
+
+Before initialising Git, tell it which files to ignore. The `venv/` folder is large and machine-specific — never commit it.
+
+Create a file called `.gitignore` in your project root:
+
+```text
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.DS_Store
+```
+
+#### Step 2 — Initialise Git in your project folder
+
+In your terminal (with venv active, inside `hello-project/`):
+
+```bash
+git init
+```
+
+This creates a hidden `.git/` folder — Git now tracks changes in this folder.
+
+#### Step 3 — Stage and commit your files
+
+```bash
+# Stage all files (hello.py and .gitignore)
+git add .
+
+# Commit with a descriptive message
+git commit -m "Initial commit: hello world project"
+```
+
+Run `git status` to confirm there is nothing left unstaged.
+
+#### Step 4 — Create a repository on GitHub
+
+1. Go to [github.com](https://github.com/) and log in.
+2. Click the **+** icon (top-right) → **New repository**.
+3. Fill in:
+   - **Repository name:** `hello-project` (match your local folder name)
+   - **Description:** `My first Python hello world project` (optional but good practice)
+   - **Visibility:** Public (so the team can see it) or Private
+   - **Do NOT tick** "Add a README" or any other options — you already have files locally
+4. Click **Create repository**.
+
+GitHub shows you a page with setup instructions — you only need the **"…or push an existing repository from the command line"** section.
+
+#### Step 5 — Connect your local project to GitHub
+
+Copy and run the commands GitHub shows. They look like this (with your actual username and repo name):
+
+```bash
+git remote add origin https://github.com/your-username/hello-project.git
+git branch -M main
+git push -u origin main
+```
+
+When prompted:
+- Username: your GitHub username
+- Password: **paste your Personal Access Token** (from section 1.5a — not your GitHub password)
+
+#### Step 6 — Verify on GitHub
+
+Reload your GitHub repository page — you should see `hello.py` and `.gitignore` listed.
+
+> 🎉 **Your first project is live on GitHub!**
+
+#### Future pushes (after the first)
+
+Once the remote is set up, pushing new changes is just:
+
+```bash
+git add .
+git commit -m "Describe your change"
+git push
+```
+
+You won't need to enter credentials again (they were cached in step 3 of section 1.5a).
+
+---
+
+### 1.12 Setup Checklist ✅
 
 Go through each item below. Do not move to Part 2 until every box is ticked.
 
 - [ ] **VS Code** (or PyCharm) is installed and opens without errors
 - [ ] VS Code Python extension is installed (or PyCharm is detecting Python automatically)
 - [ ] `python --version` (or `python3 --version`) shows `3.11.x` or newer in a terminal
-- [ ] `pip --version` (or `pip3 --version`) shows a version number
+- [ ] `pip --version # Windows` or `pip3 --version # Mac / Linux` shows a version number
 - [ ] `git --version` shows `2.x.x` or newer
 - [ ] `git config --global user.name` and `user.email` are set
+- [ ] GitHub account created and verified at [github.com](https://github.com/)
+- [ ] Personal Access Token (PAT) generated and saved securely
 - [ ] `docker --version` shows a version number
 - [ ] `docker compose version` shows a version number
 - [ ] Docker Desktop is running (whale icon visible, or `docker ps` returns without error)
 - [ ] A project folder (`hello-project`) is open in your IDE
 - [ ] A virtual environment (`venv/`) has been created inside the project folder
 - [ ] The venv is activated — `(venv)` is visible in your terminal prompt
+- [ ] `.gitignore` contains `venv/` and `__pycache__/`
 - [ ] `hello.py` contains `print("Hello, world!")`
 - [ ] Running `python hello.py` in the terminal prints `Hello, world!`
 - [ ] Running `hello.py` from the IDE (Run button or F5) also prints `Hello, world!`
+- [ ] `git init` run in `hello-project/`, files committed, pushed to GitHub
+- [ ] GitHub repo is visible at `github.com/<your-username>/hello-project`
 
 > **All boxes ticked?** You have a fully working development environment. Everything in the rest of this handbook builds on this foundation.
 
@@ -856,6 +1042,8 @@ If you are new to the terminal, here are the most important commands:
 | IDE setup | Open project folder, use IDE terminal, select Python interpreter from venv |
 | Virtual environment | Create once per project (`python -m venv venv`), activate every terminal session |
 | Hello World | `python hello.py` prints `Hello, world!` — confirms your entire setup works |
+| GitHub account | Sign up at github.com, generate a PAT, use it as your password when pushing |
+| Push to GitHub | `git init` → `git add .` → `git commit` → create GitHub repo → `git push` |
 | Learning approach | Understand systems, not just commands |
 | Git model | Working Directory → Staging → Commit → Remote |
 | Branching | Always branch, never commit directly to main |

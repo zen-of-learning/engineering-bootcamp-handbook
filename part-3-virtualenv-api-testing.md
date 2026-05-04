@@ -79,13 +79,15 @@ __pycache__/
 With your venv active, install a package:
 
 ```bash
-pip install fastapi uvicorn requests
+pip install fastapi uvicorn requests    # Windows
+pip3 install fastapi uvicorn requests   # Mac / Linux
 ```
 
 Save all installed packages so teammates can recreate your exact environment:
 
 ```bash
-pip freeze > requirements.txt
+pip freeze > requirements.txt    # Windows
+pip3 freeze > requirements.txt   # Mac / Linux
 ```
 
 The file will look like:
@@ -99,7 +101,8 @@ requests==2.31.0
 Install from an existing `requirements.txt` (what teammates do when they clone your repo):
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt    # Windows
+pip3 install -r requirements.txt   # Mac / Linux
 ```
 
 ---
@@ -121,10 +124,12 @@ source venv/bin/activate          # Mac/Linux
 # venv\Scripts\activate           # Windows
 
 # 4. Install dependencies
-pip install fastapi uvicorn requests
+pip install fastapi uvicorn requests    # Windows
+pip3 install fastapi uvicorn requests   # Mac / Linux
 
 # 5. Save dependencies for others
-pip freeze > requirements.txt
+pip freeze > requirements.txt    # Windows
+pip3 freeze > requirements.txt   # Mac / Linux
 
 # 6. Start coding!
 ```
@@ -140,7 +145,8 @@ The `requests` library lets you make HTTP calls from Python code — the same ki
 Install it (with your venv active):
 
 ```bash
-pip install requests
+pip install requests    # Windows
+pip3 install requests   # Mac / Linux
 ```
 
 **`test_api.py`** (exploratory demo — prints results for you to inspect)
@@ -148,7 +154,7 @@ pip install requests
 > This demo-style script prints what the server returns so you can see and understand the output. Part 8 shows a full test script with assertions that automatically fail when a response is wrong.
 
 ```python
-import requests   # HTTP client library — pip install requests
+import requests   # HTTP client library — install with pip (Windows) or pip3 (Mac/Linux)
 
 BASE_URL = "http://localhost:8000"   # Address where your FastAPI server is running
 
@@ -252,6 +258,32 @@ except requests.exceptions.Timeout:
 
 Every week you will build something new, test it, and demo it to the team.
 
+### 📌 Push to GitHub Before Every Demo
+
+**This is not optional.** Before your demo, your project must be pushed to your GitHub repository. The team reviews and evaluates your work from GitHub — code that exists only on your laptop does not count.
+
+**Quick push checklist:**
+
+```bash
+# 1. Make sure you're in your project folder
+cd my-project
+
+# 2. Stage all changes
+git add .
+
+# 3. Commit with a meaningful message (what did you build this week?)
+git commit -m "Add user creation endpoint with age validation"
+
+# 4. Push to GitHub
+git push
+```
+
+Then confirm at `github.com/<your-username>/<your-repo>` that your latest code is there.
+
+> **Tip:** Push at least once a day during the week, not just before the demo. It gives you a backup, shows your progress, and makes the final push less stressful.
+
+---
+
 ### Before the Demo
 
 - [ ] Code runs without errors
@@ -259,6 +291,7 @@ Every week you will build something new, test it, and demo it to the team.
 - [ ] You can explain what you built and why
 - [ ] You know which HTTP endpoints are involved
 - [ ] You have tested at least one failure case (wrong input, missing data, etc.)
+- [ ] **Your latest code is pushed to GitHub** ✅
 
 ### During the Demo
 
@@ -285,6 +318,9 @@ Write a short reflection (a few sentences is fine):
 2. Install `fastapi`, `uvicorn`, and `requests`.
 3. Write a `test_api.py` that tests both `POST /users` and `GET /users`.
 4. Run the tests and fix any failures.
+5. Push the project to a new GitHub repository named `fastapi-mini-project`.
+
+> **📌 Remember:** Push to GitHub when done. See [Part 1 — section 1.11](part-1-development-environment#111-initialize-your-demo-project-and-push-to-github) for the full push guide.
 
 ---
 

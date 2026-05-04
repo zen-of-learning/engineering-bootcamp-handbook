@@ -23,6 +23,33 @@ The backend sits between the client and the database. Every request must go thro
 | **Data handling** | Read and write data to the database |
 | **Error handling** | Return useful error messages when something goes wrong |
 
+### Real-World Example — Netflix
+
+When you open Netflix and press **Play** on a series:
+
+**What you see (frontend/UX):**
+- A shiny, responsive interface
+- A video player that starts loading within a second
+- Recommended titles on the home screen
+
+**What happens behind the scenes (backend — the heavy lifting):**
+
+```text
+Your click → Backend API
+  → Authenticate: Is this user logged in? Is their account active?
+  → Authorise: Does their subscription tier include this content?
+  → Licence check: Is this title available in their country/region?
+  → Fetch metadata: title, runtime, cast, subtitle tracks from the database
+  → Select best video quality: 4K, HD, or SD based on internet speed
+  → Log the watch event: update viewing history, play-count analytics
+  → Return: a signed streaming URL for the video CDN
+Backend response → Video player begins streaming
+```
+
+The frontend (UX) only shows you a button and a video player. The backend is doing authentication, business rules, database queries, licensing checks, and analytics — all in under a second, invisibly.
+
+> **Key insight:** The frontend makes things look good. The backend makes things **work** — safely, correctly, and at scale.
+
 ### Backend Request Flow
 
 ```text
@@ -55,13 +82,15 @@ backend/
 First, activate your virtual environment (see Part 3 for details), then install dependencies:
 
 ```bash
-pip install fastapi uvicorn psycopg2-binary
+pip install fastapi uvicorn psycopg2-binary    # Windows
+pip3 install fastapi uvicorn psycopg2-binary   # Mac / Linux
 ```
 
 Save all installed packages to `requirements.txt` so others can recreate your environment:
 
 ```bash
-pip freeze > requirements.txt
+pip freeze > requirements.txt    # Windows
+pip3 freeze > requirements.txt   # Mac / Linux
 ```
 
 The file will contain entries like:
@@ -125,7 +154,7 @@ def get_users():
 
 ## 6. Pydantic Schemas
 
-Schemas define the exact shape of request and response data. FastAPI uses them for automatic validation — if the client sends the wrong type, FastAPI rejects the request immediately.
+Schemas define the exact shape of request and response data. FastAPI uses [**Pydantic**](https://docs.pydantic.dev/) for automatic validation — if the client sends the wrong type, FastAPI rejects the request immediately.
 
 **`app/schemas/user.py`**
 
@@ -257,6 +286,8 @@ Build an in-memory user API:
 2. `GET /users` — return all users as a list
 
 Start with an in-memory list. Replace with PostgreSQL in Part 5.
+
+> **📌 Push to GitHub when done:** Every mini project must be pushed to your GitHub account. The team demos and reviews work from GitHub — if it's not there, it hasn't been submitted. See [Part 1 — section 1.11](part-1-development-environment#111-initialize-your-demo-project-and-push-to-github) for how to push a project.
 
 ---
 

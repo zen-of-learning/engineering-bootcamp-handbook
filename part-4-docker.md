@@ -163,7 +163,212 @@ volumes:
 
 ---
 
-## 7. Docker Compose Commands
+## 7. Connecting to the Docker PostgreSQL Instance
+
+Once your Docker Compose stack is running (with `docker compose up --build`), the PostgreSQL database is live inside a container. You can connect to it from your local machine in two ways: using the `psql` command-line client, or using pgAdmin (the GUI tool covered in Part 5).
+
+> **Pre-requisite:** Ensure the `db` service in your `docker-compose.yml` exposes port 5432:
+> ```yaml
+> db:
+>   image: postgres:15
+>   ports:
+>     - "5432:5432"   # Expose container port 5432 to your machine's port 5432
+> ```
+> If you add this, restart with `docker compose down && docker compose up --build`.
+
+---
+
+### Option A — Connect via psql (Command-Line)
+
+`psql` is the official PostgreSQL command-line client. It comes bundled with a PostgreSQL installation, or you can install it standalone.
+
+<details markdown="1">
+<summary>🪟 Windows — using psql</summary>
+
+If you have PostgreSQL installed locally, `psql` is available in Git Bash or Command Prompt. Otherwise, install it from [postgresql.org/download/windows](https://www.postgresql.org/download/windows/).
+
+```bash
+psql -h localhost -p 5432 -U postgres -d appdb
+# Password: password  (as set in docker-compose.yml)
+```
+
+</details>
+
+<details markdown="1">
+<summary>🍎 Mac — using psql</summary>
+
+Install via Homebrew if not already present:
+
+```bash
+brew install libpq
+brew link --force libpq
+```
+
+Then connect:
+
+```bash
+psql -h localhost -p 5432 -U postgres -d appdb
+```
+
+</details>
+
+<details markdown="1">
+<summary>🐧 Linux — using psql</summary>
+
+```bash
+sudo apt install postgresql-client -y
+
+psql -h localhost -p 5432 -U postgres -d appdb
+```
+
+</details>
+
+#### Alternative: psql inside the container (no local install needed)
+
+You can also open a shell directly inside the running container — no local PostgreSQL client needed:
+
+```bash
+# Get the container name (look for the postgres container)
+docker compose ps
+
+# Open psql inside the container
+docker exec -it <container_name> psql -U postgres -d appdb
+```
+
+Replace `<container_name>` with the name shown by `docker compose ps` (e.g., `my-project-db-1`).
+
+Once connected, you see the `appdb=#` prompt. You're inside PostgreSQL.
+
+---
+
+### Option B — Connect via pgAdmin (GUI)
+
+See **Part 5, section 11** for full pgAdmin installation and connection instructions. Use:
+
+- **Host:** `localhost`
+- **Port:** `5432`
+- **Database:** `appdb`
+- **Username:** `postgres`
+- **Password:** `password`
+
+---
+
+## 8. Step-by-Step CRUD Operations Inside Docker
+
+Once connected to the running PostgreSQL instance (via psql or pgAdmin), you can run SQL commands to create, read, update, and delete data.
+
+### Step 1 — Create the table (first time only)
+
+```sql
+-- Create the users table
+CREATE TABLE IF NOT EXISTS users (
+    id    SERIAL PRIMARY KEY,
+    name  VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    age   INTEGER
+);
+```
+
+Verify it was created:
+
+```sql
+-- In psql: list all tables
+\dt
+```
+
+Or in pgAdmin, browse the table in the sidebar: **Databases → appdb → Schemas → public → Tables**.
+
+---
+
+### Step 2 — CREATE (Insert data)
+
+```sql
+-- Insert a user
+INSERT INTO users (name, email, age)
+VALUES ('Alice', 'alice@example.com', 28);
+
+-- Insert another user
+INSERT INTO users (name, email, age)
+VALUES ('Bob', 'bob@example.com', 34);
+```
+
+Output: `INSERT 0 1` — one row was added each time.
+
+---
+
+### Step 3 — READ (Query data)
+
+```sql
+-- Get all users
+SELECT * FROM users;
+```
+
+Expected result:
+
+```text
+ id | name  |       email        | age
+----+-------+--------------------+-----
+  1 | Alice | alice@example.com  |  28
+  2 | Bob   | bob@example.com    |  34
+(2 rows)
+```
+
+```sql
+-- Get only users older than 30
+SELECT * FROM users WHERE age > 30;
+
+-- Get a specific user by id
+SELECT * FROM users WHERE id = 1;
+```
+
+---
+
+### Step 4 — UPDATE (Change data)
+
+```sql
+-- Update Alice's age
+-- Always include WHERE — without it, every row is updated!
+UPDATE users SET age = 29 WHERE id = 1;
+```
+
+Confirm:
+
+```sql
+SELECT * FROM users WHERE id = 1;
+```
+
+---
+
+### Step 5 — DELETE (Remove data)
+
+```sql
+-- Delete Bob
+-- Always include WHERE — without it, every row is deleted!
+DELETE FROM users WHERE id = 2;
+```
+
+Confirm:
+
+```sql
+SELECT * FROM users;
+-- Only Alice should remain
+```
+
+---
+
+### Quit psql
+
+```bash
+\q
+```
+
+Or press `Ctrl+D`.
+
+> **Persistence check:** Stop and restart Docker Compose, then reconnect and run `SELECT * FROM users;` — Alice should still be there. This confirms the volume is working.
+
+---
+
+## 9. Docker Compose Commands
 
 | Command | Purpose |
 |---------|---------|
@@ -176,7 +381,7 @@ volumes:
 
 ---
 
-## 8. Environment Variables
+## 10. Environment Variables
 
 Never hardcode secrets or configuration. Use environment variables.
 
@@ -206,7 +411,7 @@ DB_PASS = os.getenv("DB_PASSWORD", "password")
 
 ---
 
-## 9. Real Docker Failures and Fixes
+## 11. Real Docker Failures and Fixes
 
 | Failure | Cause | Fix |
 |---------|-------|-----|
@@ -219,7 +424,7 @@ DB_PASS = os.getenv("DB_PASSWORD", "password")
 
 ---
 
-## 10. Mini Project
+## 12. Mini Project
 
 1. Write a `Dockerfile` for your FastAPI backend.
 2. Build the image: `docker build -t my-backend .`
@@ -227,6 +432,10 @@ DB_PASS = os.getenv("DB_PASSWORD", "password")
 4. Verify it works at `http://localhost:8000/docs`
 5. Write a `docker-compose.yml` with your backend and a PostgreSQL database.
 6. Start both with: `docker compose up --build`
+7. Connect to the running PostgreSQL container using psql or pgAdmin.
+8. Create the `users` table and insert at least two rows via CRUD operations.
+
+> **📌 Push to GitHub when done.** See [Part 1 — section 1.11](part-1-development-environment#111-initialize-your-demo-project-and-push-to-github) for the push guide.
 
 ---
 
@@ -247,6 +456,8 @@ DB_PASS = os.getenv("DB_PASSWORD", "password")
 | Docker Compose | Orchestrates multiple containers with one config file |
 | Networking | Use service names (not `localhost`) between containers |
 | Environment variables | Never hardcode config — use `os.getenv()` |
+| Connect to Docker DB | Expose port 5432 in Compose, then connect with `psql` or pgAdmin using `localhost:5432` |
+| CRUD in Docker | Use psql or pgAdmin to run `INSERT`, `SELECT`, `UPDATE`, `DELETE` against the containerised database |
 
 ---
 

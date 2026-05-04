@@ -210,7 +210,7 @@ ModuleNotFoundError: No module named 'fastapi'
 
 This usually means:
 1. Your virtual environment is not activated — run `source venv/bin/activate`
-2. The package is not installed — run `pip install fastapi`
+2. The package is not installed — run `pip install fastapi` (Windows) or `pip3 install fastapi` (Mac/Linux)
 3. Inside Docker: the package is missing from `requirements.txt`
 
 ---
