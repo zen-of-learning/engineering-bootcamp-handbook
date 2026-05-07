@@ -288,17 +288,6 @@ tasks.forEach((task) => {
 
 ---
 
-## 30-Minute Flow
-
-```text
-5 min  → Explain dynamic UI
-10 min → createElement, classList, appendChild
-10 min → Product/list exercises
-10 min → Todo UI mini-project
-```
-
----
-
 ## Expected Outcome
 
 You can create new HTML elements with JavaScript, add text and classes, append them to the page, and render simple lists from arrays.

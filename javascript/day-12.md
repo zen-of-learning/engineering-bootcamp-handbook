@@ -368,17 +368,6 @@ init();
 
 ---
 
-## 30-Minute Flow
-
-```text
-5 min  → Explain clean structure
-10 min → Refactor messy example
-10 min → Students refactor previous project
-5 min  → Review naming and functions
-```
-
----
-
 ## Expected Outcome
 
 You can split a small frontend app into clear files and functions so the project is easier to read, debug, and prepare for React.

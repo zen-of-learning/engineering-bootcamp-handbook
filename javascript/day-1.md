@@ -320,17 +320,6 @@ console.log(`${userName} is now ${userAge} years old.`);
 
 ---
 
-## 30-Minute Flow
-
-```text
-5 min  → Explain const, let, and data types
-10 min → Code user profile example
-10 min → Exercises
-5 min  → Mini-task review
-```
-
----
-
 ## Expected Outcome
 
 You can store simple values, print them with useful labels, recognize basic JavaScript data types, and use `const` or `let` correctly.

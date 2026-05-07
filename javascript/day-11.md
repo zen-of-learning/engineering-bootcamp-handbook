@@ -261,17 +261,6 @@ Requirements:
 
 ---
 
-## 30-Minute Flow
-
-```text
-5 min  → Explain API-to-UI flow
-10 min → Guided users example
-10 min → Posts/users exercises
-10 min → API users mini-project
-```
-
----
-
 ## Expected Outcome
 
 You can fetch API data, show loading and error states, and render API results into visible UI elements.

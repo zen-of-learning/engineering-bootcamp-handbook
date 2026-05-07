@@ -280,17 +280,6 @@ getUser();
 
 ---
 
-## 30-Minute Flow
-
-```text
-5 min  → Explain API/fetch
-10 min → async/await examples
-10 min → Exercises
-5 min  → Mini-task review
-```
-
----
-
 ## Expected Outcome
 
 You can call a public API, wait for data with `async/await`, convert the response to JSON, check for bad responses, and handle errors with `try/catch`.
