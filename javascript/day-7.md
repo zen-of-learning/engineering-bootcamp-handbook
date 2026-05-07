@@ -1,91 +1,307 @@
-# Day 7 — DOM Manipulation
+# Day 7 — DOM Manipulation: Creating Elements
 
-> **Goal:** Create elements, add classes, and build a simple Todo UI with JavaScript.
+## Goal
 
----
-
-## Short Explanation
-
-Changing existing text is useful, but real apps also create new elements. A todo app creates a new list item for each task. `createElement` creates an HTML element in memory. `textContent` fills it with text. `classList.add` applies CSS classes. `appendChild` places the new element on the page. This pattern appears everywhere in frontend work: create an element, add content, style it, and insert it. Today you will build a Todo UI from sample data, without saving anything yet.
+Students should learn how to create UI elements using JavaScript.
 
 ---
 
-## Code Examples
+## Practical Explanation
 
-`index.html`:
+So far, we changed existing HTML.
 
-```html
-<h1>Todo List</h1>
-<ul id="todo-list"></ul>
-<script src="script.js"></script>
+Today, we create new HTML elements using JavaScript.
+
+This matters because real apps often display dynamic lists:
+
+- Todo list
+- Product list
+- User list
+- API results
+- Search results
+- Comments
+- Notifications
+
+Instead of hardcoding every item in HTML, JavaScript can create them.
+
+---
+
+## Key Methods
+
+```text
+createElement → creates an HTML element
+textContent   → adds text
+classList.add → adds CSS class
+appendChild   → adds element to the page
 ```
 
-`style.css` idea:
+---
+
+## Basic Example
+
+HTML:
+
+```html
+<ul id="todo-list"></ul>
+```
+
+JavaScript:
+
+```js
+const todoList = document.querySelector("#todo-list");
+
+const li = document.createElement("li");
+li.textContent = "Learn JavaScript";
+
+todoList.appendChild(li);
+```
+
+---
+
+## Adding Classes
+
+```js
+li.classList.add("todo-item");
+```
+
+CSS:
 
 ```css
 .todo-item {
-  padding: 8px;
-  margin-bottom: 6px;
-  border: 1px solid #ccc;
-}
-
-.completed {
-  text-decoration: line-through;
-  color: gray;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 ```
 
-`script.js`:
+---
+
+## Creating Multiple Items from an Array
 
 ```js
-const todos = [
-  { text: "Practice arrays", isDone: true },
-  { text: "Build Todo UI", isDone: false },
-  { text: "Review DOM methods", isDone: false }
-];
-
+const tasks = ["Study JS", "Practice DOM", "Build Todo App"];
 const todoList = document.querySelector("#todo-list");
 
-todos.forEach((todo) => {
-  const listItem = document.createElement("li");
-  listItem.textContent = todo.text;
-  listItem.classList.add("todo-item");
+tasks.forEach((task) => {
+  const li = document.createElement("li");
+  li.textContent = task;
+  li.classList.add("todo-item");
 
-  if (todo.isDone) {
-    listItem.classList.add("completed");
-  }
-
-  todoList.appendChild(listItem);
+  todoList.appendChild(li);
 });
 ```
 
 ---
 
+## Creating Product Cards
+
+HTML:
+
+```html
+<div id="products"></div>
+```
+
+JavaScript:
+
+```js
+const products = [
+  { name: "Laptop", price: 1200 },
+  { name: "Mouse", price: 25 },
+  { name: "Keyboard", price: 75 }
+];
+
+const productsContainer = document.querySelector("#products");
+
+products.forEach((product) => {
+  const card = document.createElement("div");
+  card.classList.add("product-card");
+
+  card.innerHTML = `
+    <h3>${product.name}</h3>
+    <p>$${product.price}</p>
+  `;
+
+  productsContainer.appendChild(card);
+});
+```
+
+CSS:
+
+```css
+.product-card {
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+```
+
+---
+
+## Guided Example: Todo UI
+
+HTML:
+
+```html
+<h1>Todo App</h1>
+<ul id="todo-list"></ul>
+```
+
+JavaScript:
+
+```js
+const tasks = [
+  "Learn variables",
+  "Practice functions",
+  "Build DOM project"
+];
+
+const todoList = document.querySelector("#todo-list");
+
+tasks.forEach((task) => {
+  const li = document.createElement("li");
+  li.textContent = task;
+  li.classList.add("todo-item");
+
+  todoList.appendChild(li);
+});
+```
+
+CSS:
+
+```css
+.todo-item {
+  padding: 12px;
+  margin-bottom: 8px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+```
+
+---
+
+## Common Mistakes
+
+### Mistake 1: Creating element but not appending it
+
+```js
+const li = document.createElement("li");
+li.textContent = "Task";
+```
+
+This creates the element, but it does not show on the page.
+
+Need:
+
+```js
+todoList.appendChild(li);
+```
+
+### Mistake 2: Selecting wrong container
+
+```js
+const todoList = document.querySelector("#todos");
+```
+
+But HTML has:
+
+```html
+<ul id="todo-list"></ul>
+```
+
+Correct:
+
+```js
+const todoList = document.querySelector("#todo-list");
+```
+
+### Mistake 3: Repeating too much code
+
+Instead of:
+
+```js
+const li1 = document.createElement("li");
+const li2 = document.createElement("li");
+const li3 = document.createElement("li");
+```
+
+Use an array and `forEach`.
+
+---
+
 ## Exercises
 
-1. Create a `li` element with JavaScript and append it to a `ul`.
-2. Add a CSS class to the new `li` using `classList.add`.
-3. Render at least three tasks from an array.
+### Exercise 1
+
+Create a list of 3 cities using JavaScript.
+
+### Exercise 2
+
+Create product cards from an array.
+
+Each card should show:
+
+- Product name
+- Price
+- Stock status
+
+### Exercise 3
+
+Add a CSS class to every created card.
 
 ---
 
 ## Mini-Project
 
-Build a simple Todo UI with sample tasks.
+Build a simple Todo UI.
 
-Requirements:
+HTML:
 
-- Store tasks in an array
-- Render every task into a list
-- Add a CSS class to each task
-- Add a different class for completed tasks
-- No input and no persistence yet
+```html
+<h1>Todo App</h1>
+<ul id="todo-list"></ul>
+```
+
+JavaScript:
+
+```js
+const tasks = [
+  { title: "Learn JavaScript basics", completed: false },
+  { title: "Practice DOM", completed: false },
+  { title: "Build Todo UI", completed: true }
+];
+
+const todoList = document.querySelector("#todo-list");
+
+tasks.forEach((task) => {
+  const li = document.createElement("li");
+  li.classList.add("todo-item");
+
+  li.innerHTML = `
+    <span>${task.title}</span>
+    <strong>${task.completed ? "Done" : "Pending"}</strong>
+  `;
+
+  todoList.appendChild(li);
+});
+```
+
+---
+
+## 30-Minute Flow
+
+```text
+5 min  → Explain dynamic UI
+10 min → createElement, classList, appendChild
+10 min → Product/list exercises
+10 min → Todo UI mini-project
+```
 
 ---
 
 ## Expected Outcome
 
-You can create DOM elements from data and render a small UI from an array of objects.
+You can create new HTML elements with JavaScript, add text and classes, append them to the page, and render simple lists from arrays.
 
 ---
 

@@ -1,78 +1,283 @@
 # Day 6 — DOM Basics
 
-> **Goal:** Select HTML elements and update page content with JavaScript.
+## Goal
+
+Students should learn how JavaScript connects to HTML.
 
 ---
 
-## Short Explanation
+## Practical Explanation
 
-The DOM is the browser's JavaScript-friendly version of your HTML page. JavaScript can select elements, read them, change text, insert HTML, and respond to users. Today, keep it simple: select one element and update what the user sees. `querySelector` finds the first matching element. `textContent` changes plain text. `innerHTML` inserts HTML markup. Use `textContent` for normal text. Use `innerHTML` only when you intentionally want to create HTML. This is the first step from console-only JavaScript to real frontend apps.
+The DOM is the browser’s live version of your HTML.
 
----
-
-## Code Examples
-
-`index.html`:
+When you write:
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>DOM Practice</title>
-</head>
-<body>
-  <h1 id="title">Welcome</h1>
-  <p class="message">Loading...</p>
-  <div id="profile"></div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+<h1>Hello</h1>
 ```
 
-`script.js`:
+The browser creates a JavaScript-accessible version of that element.
+
+JavaScript can then:
+
+- Read it
+- Change it
+- Hide it
+- Create new elements
+- React to clicks
+- Display API data
+
+This is where JavaScript starts feeling like real frontend development.
+
+---
+
+## Basic HTML
+
+```html
+<h1 id="title">Welcome</h1>
+<p class="message">This is the old message.</p>
+<div id="content"></div>
+```
+
+---
+
+## Selecting Elements
+
+Use `querySelector`.
 
 ```js
 const title = document.querySelector("#title");
 const message = document.querySelector(".message");
-const profile = document.querySelector("#profile");
+const content = document.querySelector("#content");
+```
 
-title.textContent = "JavaScript changed this heading";
-message.textContent = "The page is ready.";
+Selectors work like CSS:
 
-profile.innerHTML = `
+```text
+#title    → id
+.message  → class
+h1        → tag
+```
+
+---
+
+## Changing Text
+
+Use `textContent`.
+
+```js
+const title = document.querySelector("#title");
+
+title.textContent = "Welcome to JavaScript";
+```
+
+---
+
+## Changing HTML
+
+Use `innerHTML`.
+
+```js
+const content = document.querySelector("#content");
+
+content.innerHTML = `
   <h2>User Profile</h2>
-  <p>Name: Lina</p>
+  <p>Name: Alex</p>
   <p>Role: Frontend Student</p>
 `;
+```
+
+Use `textContent` for simple text.  
+Use `innerHTML` when adding HTML structure.
+
+---
+
+## Guided Example
+
+HTML:
+
+```html
+<h1 id="page-title">Old Title</h1>
+<p id="description">Old description</p>
+<div id="user-card"></div>
+```
+
+JavaScript:
+
+```js
+const pageTitle = document.querySelector("#page-title");
+const description = document.querySelector("#description");
+const userCard = document.querySelector("#user-card");
+
+pageTitle.textContent = "User Dashboard";
+description.textContent = "Here is the current user information.";
+
+const user = {
+  name: "Maya",
+  email: "maya@example.com",
+  city: "Dallas"
+};
+
+userCard.innerHTML = `
+  <h2>${user.name}</h2>
+  <p>Email: ${user.email}</p>
+  <p>City: ${user.city}</p>
+`;
+```
+
+---
+
+## Real-World Example
+
+Display a product.
+
+HTML:
+
+```html
+<div id="product"></div>
+```
+
+JavaScript:
+
+```js
+const product = {
+  name: "Laptop",
+  price: 1200,
+  inStock: true
+};
+
+const productContainer = document.querySelector("#product");
+
+productContainer.innerHTML = `
+  <h2>${product.name}</h2>
+  <p>Price: $${product.price}</p>
+  <p>Status: ${product.inStock ? "Available" : "Out of Stock"}</p>
+`;
+```
+
+---
+
+## Common Mistakes
+
+### Mistake 1: Wrong selector
+
+HTML:
+
+```html
+<h1 id="title">Hello</h1>
+```
+
+Wrong:
+
+```js
+document.querySelector("title");
+```
+
+Correct:
+
+```js
+document.querySelector("#title");
+```
+
+### Mistake 2: JavaScript runs before HTML exists
+
+Put the script before the closing `body` tag:
+
+```html
+<body>
+  <h1 id="title">Hello</h1>
+
+  <script src="script.js"></script>
+</body>
+```
+
+### Mistake 3: Using `innerHTML` for simple text
+
+This works:
+
+```js
+title.innerHTML = "Hello";
+```
+
+But better:
+
+```js
+title.textContent = "Hello";
 ```
 
 ---
 
 ## Exercises
 
-1. Select a heading and change its text.
-2. Select a paragraph and display your name inside it.
-3. Use `innerHTML` to insert a small profile card with a name and city.
+### Exercise 1
+
+Create an `h1` with id `main-title`.
+
+Use JavaScript to change its text.
+
+### Exercise 2
+
+Create a `div` with id `profile`.
+
+Use `innerHTML` to display:
+
+- Name
+- Email
+- City
+
+### Exercise 3
+
+Create a product object and display it in the browser.
 
 ---
 
 ## Mini-Task
 
-Create a simple webpage with:
+Display dynamic text on a webpage.
 
-- one heading
-- one paragraph
-- one empty `div`
+HTML:
 
-Use JavaScript to display dynamic text about a user in the empty `div`.
+```html
+<h1 id="welcome"></h1>
+<p id="description"></p>
+<div id="profile"></div>
+```
+
+JavaScript:
+
+```js
+const user = {
+  name: "Nina",
+  role: "Frontend Student",
+  city: "Austin"
+};
+
+document.querySelector("#welcome").textContent = `Welcome, ${user.name}`;
+document.querySelector("#description").textContent = "You are learning DOM basics.";
+
+document.querySelector("#profile").innerHTML = `
+  <h2>${user.name}</h2>
+  <p>Role: ${user.role}</p>
+  <p>City: ${user.city}</p>
+`;
+```
+
+---
+
+## 30-Minute Flow
+
+```text
+5 min  → Explain DOM
+10 min → querySelector, textContent, innerHTML
+10 min → Exercises
+5 min  → Dynamic profile mini-task
+```
 
 ---
 
 ## Expected Outcome
 
-You can connect a JavaScript file to an HTML page, select elements, and update visible content in the browser.
+You can explain what the DOM is, select HTML elements with JavaScript, update simple text, and render basic HTML from data.
 
 ---
 

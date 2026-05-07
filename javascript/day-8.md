@@ -1,83 +1,287 @@
-# Day 8 — Events
+# Day 8 — Events: Clicks and Inputs
 
-> **Goal:** Use event listeners to respond to clicks and input changes.
+## Goal
 
----
-
-## Short Explanation
-
-Events are how users talk to your app. A click, keypress, input change, and form submission are all events. `addEventListener` lets you run code when an event happens. Click events are useful for buttons. Input events are useful when you want to react while the user types. Today you will make yesterday's Todo UI interactive by reading an input value and adding a new task when a button is clicked. This is a critical frontend skill because almost every app depends on user actions.
+Students should learn how to make pages respond to user actions.
 
 ---
 
-## Code Examples
+## Practical Explanation
 
-`index.html`:
+Events are actions that happen in the browser.
+
+Common examples:
+
+- User clicks a button
+- User types in an input
+- User submits a form
+- User selects an option
+- User scrolls the page
+
+JavaScript listens for these actions using `addEventListener`.
+
+This is one of the most important frontend concepts.
+
+---
+
+## Click Event
+
+HTML:
 
 ```html
-<h1>Todo List</h1>
-<input id="task-input" type="text" placeholder="Enter a task">
-<button id="add-task-button">Add Task</button>
-<p id="preview"></p>
-<ul id="todo-list"></ul>
-<script src="script.js"></script>
+<button id="click-btn">Click Me</button>
+<p id="message"></p>
 ```
 
-`script.js`:
+JavaScript:
 
 ```js
-const taskInput = document.querySelector("#task-input");
-const addTaskButton = document.querySelector("#add-task-button");
-const todoList = document.querySelector("#todo-list");
+const button = document.querySelector("#click-btn");
+const message = document.querySelector("#message");
+
+button.addEventListener("click", () => {
+  message.textContent = "Button clicked!";
+});
+```
+
+---
+
+## Input Event
+
+HTML:
+
+```html
+<input id="name-input" type="text">
+<p id="preview"></p>
+```
+
+JavaScript:
+
+```js
+const nameInput = document.querySelector("#name-input");
 const preview = document.querySelector("#preview");
 
-taskInput.addEventListener("input", () => {
-  preview.textContent = `Typing: ${taskInput.value}`;
+nameInput.addEventListener("input", () => {
+  preview.textContent = nameInput.value;
 });
+```
 
-addTaskButton.addEventListener("click", () => {
-  const taskText = taskInput.value;
+The `input` event runs every time the user types.
 
-  if (taskText === "") {
+---
+
+## Reading Input Value
+
+```js
+const inputValue = nameInput.value;
+```
+
+Input values are always strings.
+
+```js
+const ageInput = document.querySelector("#age");
+console.log(ageInput.value); // "25", not 25
+```
+
+Convert to number when needed:
+
+```js
+const age = Number(ageInput.value);
+```
+
+---
+
+## Guided Example: Add Item on Button Click
+
+HTML:
+
+```html
+<input id="item-input" type="text">
+<button id="add-btn">Add Item</button>
+<ul id="item-list"></ul>
+```
+
+JavaScript:
+
+```js
+const itemInput = document.querySelector("#item-input");
+const addButton = document.querySelector("#add-btn");
+const itemList = document.querySelector("#item-list");
+
+addButton.addEventListener("click", () => {
+  const itemText = itemInput.value;
+
+  if (itemText === "") {
     return;
   }
 
-  const listItem = document.createElement("li");
-  listItem.textContent = taskText;
-  todoList.appendChild(listItem);
+  const li = document.createElement("li");
+  li.textContent = itemText;
 
-  taskInput.value = "";
-  preview.textContent = "";
+  itemList.appendChild(li);
+
+  itemInput.value = "";
 });
+```
+
+---
+
+## Improving User Experience
+
+Trim empty spaces:
+
+```js
+const itemText = itemInput.value.trim();
+```
+
+This prevents input like:
+
+```text
+"      "
+```
+
+Updated version:
+
+```js
+addButton.addEventListener("click", () => {
+  const itemText = itemInput.value.trim();
+
+  if (itemText === "") {
+    return;
+  }
+
+  const li = document.createElement("li");
+  li.textContent = itemText;
+
+  itemList.appendChild(li);
+
+  itemInput.value = "";
+});
+```
+
+---
+
+## Common Mistakes
+
+### Mistake 1: Calling the function immediately
+
+Wrong:
+
+```js
+button.addEventListener("click", showMessage());
+```
+
+Correct:
+
+```js
+button.addEventListener("click", showMessage);
+```
+
+Or:
+
+```js
+button.addEventListener("click", () => {
+  showMessage();
+});
+```
+
+### Mistake 2: Forgetting `.value`
+
+Wrong:
+
+```js
+const name = nameInput;
+```
+
+Correct:
+
+```js
+const name = nameInput.value;
+```
+
+### Mistake 3: Not clearing input after adding item
+
+Better UX:
+
+```js
+itemInput.value = "";
 ```
 
 ---
 
 ## Exercises
 
-1. Log `"Button clicked"` when a button is clicked.
-2. Display live input text in a paragraph as the user types.
-3. Clear the input after adding an item to the page.
+### Exercise 1
+
+Create a button that changes heading text.
+
+### Exercise 2
+
+Create an input that shows live preview text.
+
+### Exercise 3
+
+Create a button that adds a new product name to a list.
 
 ---
 
 ## Mini-Project
 
-Add tasks to the Todo list using an input and button.
+Add tasks to Todo list using input and button.
 
-Requirements:
+HTML:
 
-- Read the input value
-- Ignore empty tasks
-- Create a new `li`
-- Append it to the list
-- Clear the input after adding
+```html
+<h1>Todo App</h1>
+<input id="task-input" type="text" placeholder="Enter task">
+<button id="add-btn">Add Task</button>
+<ul id="todo-list"></ul>
+```
+
+JavaScript:
+
+```js
+const taskInput = document.querySelector("#task-input");
+const addButton = document.querySelector("#add-btn");
+const todoList = document.querySelector("#todo-list");
+
+const addTask = () => {
+  const taskText = taskInput.value.trim();
+
+  if (taskText === "") {
+    return;
+  }
+
+  const li = document.createElement("li");
+  li.textContent = taskText;
+  li.classList.add("todo-item");
+
+  todoList.appendChild(li);
+
+  taskInput.value = "";
+};
+
+addButton.addEventListener("click", addTask);
+```
+
+Bonus: Add task when pressing Enter later with form submission on Day 9.
+
+---
+
+## 30-Minute Flow
+
+```text
+5 min  → Explain events
+10 min → Button and input examples
+10 min → Exercises
+10 min → Todo input mini-project
+```
 
 ---
 
 ## Expected Outcome
 
-You can connect user actions to JavaScript and update the page based on clicks and typed input.
+You can listen for clicks and input changes, read input values, create elements from user input, and update the page after user actions.
 
 ---
 
