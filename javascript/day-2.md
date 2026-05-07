@@ -304,17 +304,6 @@ console.log("City:", user.address.city);
 
 ---
 
-## 30-Minute Flow
-
-```text
-5 min  → Explain arrays vs objects
-10 min → Guided user/product examples
-10 min → Exercises
-5 min  → Mini-task review
-```
-
----
-
 ## Expected Outcome
 
 You can group values in arrays, describe one item with an object, update object properties, and read nested user data.

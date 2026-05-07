@@ -264,17 +264,6 @@ document.querySelector("#profile").innerHTML = `
 
 ---
 
-## 30-Minute Flow
-
-```text
-5 min  → Explain DOM
-10 min → querySelector, textContent, innerHTML
-10 min → Exercises
-5 min  → Dynamic profile mini-task
-```
-
----
-
 ## Expected Outcome
 
 You can explain what the DOM is, select HTML elements with JavaScript, update simple text, and render basic HTML from data.

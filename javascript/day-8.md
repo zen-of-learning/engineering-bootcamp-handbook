@@ -268,17 +268,6 @@ Bonus: Add task when pressing Enter later with form submission on Day 9.
 
 ---
 
-## 30-Minute Flow
-
-```text
-5 min  → Explain events
-10 min → Button and input examples
-10 min → Exercises
-10 min → Todo input mini-project
-```
-
----
-
 ## Expected Outcome
 
 You can listen for clicks and input changes, read input values, create elements from user input, and update the page after user actions.

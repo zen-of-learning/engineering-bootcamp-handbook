@@ -290,17 +290,6 @@ console.log("Active Users:", activeUserNames);
 
 ---
 
-## 30-Minute Flow
-
-```text
-5 min  → Explain why arrays matter
-10 min → Teach forEach, map, filter, find
-10 min → Product/student exercises
-5 min  → Active users mini-task
-```
-
----
-
 ## Expected Outcome
 
 You can use `forEach`, `map`, `filter`, and `find` to work with users, products, and other frontend lists.

@@ -285,17 +285,6 @@ console.log(validateSignup("Sam", 15));
 
 ---
 
-## 30-Minute Flow
-
-```text
-5 min  → Explain if/else and comparisons
-10 min → Function examples
-10 min → Exercises
-5 min  → Signup validation mini-task
-```
-
----
-
 ## Expected Outcome
 
 You can compare values, write `if/else` decisions, create reusable functions, return results, and validate basic signup input.
