@@ -1,26 +1,53 @@
-# Day 4 — Arrays
+# Day 4 — Arrays: map, filter, find, forEach
 
-> **Goal:** Use `forEach`, `map`, `filter`, and `find` with real lists of users.
+## Goal
 
----
-
-## Short Explanation
-
-Frontend apps often receive lists from APIs: users, posts, products, comments, or orders. Array methods help you work with those lists. Use `forEach` when you want to do something for every item. Use `map` when you want to create a new list from an old list. Use `filter` when you want only the items that match a condition. Use `find` when you want the first matching item. Do not worry about deep theory today. Focus on the question each method answers: “do something,” “transform,” “keep some,” or “find one.” These methods are essential before DOM rendering and API work.
+Students should learn the most useful array methods for frontend work.
 
 ---
 
-## Code Examples
+## Practical Explanation
+
+Frontend apps constantly display lists.
+
+Examples:
+
+- List of users
+- List of products
+- List of posts
+- List of comments
+- List of tasks
+- List of notifications
+
+Array methods help us work with these lists.
+
+The four most important methods for this bootcamp are:
+
+```text
+forEach → do something for each item
+map     → create a new transformed array
+filter  → keep only matching items
+find    → get the first matching item
+```
+
+---
+
+## Starting Data
 
 ```js
 const users = [
-  { id: 1, name: "Ava", email: "ava@example.com", isActive: true },
-  { id: 2, name: "Ben", email: "ben@example.com", isActive: false },
-  { id: 3, name: "Cara", email: "cara@example.com", isActive: true }
+  { id: 1, name: "Alex", active: true, role: "admin" },
+  { id: 2, name: "Maya", active: false, role: "user" },
+  { id: 3, name: "Sam", active: true, role: "user" },
+  { id: 4, name: "Nina", active: true, role: "manager" }
 ];
 ```
 
-Print every name:
+---
+
+## forEach
+
+Use when you want to do something with each item.
 
 ```js
 users.forEach((user) => {
@@ -28,66 +55,255 @@ users.forEach((user) => {
 });
 ```
 
-Create a list of emails:
+Good for:
+
+- Printing values
+- Creating DOM elements
+- Running side effects
+
+---
+
+## map
+
+Use when you want to create a new array.
 
 ```js
-const emails = users.map((user) => {
-  return user.email;
+const names = users.map((user) => {
+  return user.name;
 });
 
-console.log(emails);
+console.log(names);
 ```
 
-Keep only active users:
+Short version:
+
+```js
+const names = users.map((user) => user.name);
+```
+
+Result:
+
+```js
+["Alex", "Maya", "Sam", "Nina"]
+```
+
+---
+
+## filter
+
+Use when you want only matching items.
 
 ```js
 const activeUsers = users.filter((user) => {
-  return user.isActive === true;
+  return user.active === true;
 });
 
 console.log(activeUsers);
 ```
 
-Find one user:
+Shorter:
 
 ```js
-const selectedUser = users.find((user) => {
-  return user.id === 2;
+const activeUsers = users.filter((user) => user.active);
+```
+
+---
+
+## find
+
+Use when you want one item.
+
+```js
+const adminUser = users.find((user) => {
+  return user.role === "admin";
 });
 
-console.log(selectedUser);
+console.log(adminUser);
 ```
+
+Result:
+
+```js
+{ id: 1, name: "Alex", active: true, role: "admin" }
+```
+
+---
+
+## Combining Methods
+
+Get names of active users.
+
+```js
+const activeUserNames = users
+  .filter((user) => user.active)
+  .map((user) => user.name);
+
+console.log(activeUserNames);
+```
+
+Result:
+
+```js
+["Alex", "Sam", "Nina"]
+```
+
+This pattern is very common in frontend apps.
+
+---
+
+## Real-World Product Example
+
+```js
+const products = [
+  { id: 1, name: "Laptop", price: 1200, category: "electronics" },
+  { id: 2, name: "Mouse", price: 25, category: "electronics" },
+  { id: 3, name: "Notebook", price: 10, category: "stationery" },
+  { id: 4, name: "Keyboard", price: 75, category: "electronics" }
+];
+
+const cheapProducts = products.filter((product) => product.price < 100);
+
+console.log(cheapProducts);
+```
+
+Get product names:
+
+```js
+const productNames = products.map((product) => product.name);
+
+console.log(productNames);
+```
+
+Find one product:
+
+```js
+const laptop = products.find((product) => product.name === "Laptop");
+
+console.log(laptop);
+```
+
+---
+
+## Common Mistakes
+
+### Mistake 1: Using `map` when you need `filter`
+
+Wrong:
+
+```js
+const activeUsers = users.map((user) => user.active);
+```
+
+This gives booleans:
+
+```js
+[true, false, true, true]
+```
+
+Correct:
+
+```js
+const activeUsers = users.filter((user) => user.active);
+```
+
+### Mistake 2: Forgetting `return`
+
+Wrong:
+
+```js
+const names = users.map((user) => {
+  user.name;
+});
+```
+
+Correct:
+
+```js
+const names = users.map((user) => {
+  return user.name;
+});
+```
+
+Or:
+
+```js
+const names = users.map((user) => user.name);
+```
+
+### Mistake 3: Expecting `find` to return many items
+
+```js
+const activeUser = users.find((user) => user.active);
+```
+
+This returns only the first active user.
+
+Use `filter` for many.
 
 ---
 
 ## Exercises
 
-1. Use `forEach` to print every user name.
-2. Use `map` to create an array of email addresses.
-3. Use `find` to get the user whose name is `"Cara"`.
+### Exercise 1
+
+Given:
+
+```js
+const students = [
+  { name: "Alex", grade: 85 },
+  { name: "Maya", grade: 92 },
+  { name: "Sam", grade: 67 },
+  { name: "Nina", grade: 74 }
+];
+```
+
+Use `filter` to get students with grade above `80`.
+
+### Exercise 2
+
+Use `map` to get only student names.
+
+### Exercise 3
+
+Use `find` to get the student named `"Sam"`.
 
 ---
 
 ## Mini-Task
 
-Given the `users` array, filter active users and display only their names.
-
-Expected result:
+Filter active users and display names.
 
 ```js
-["Ava", "Cara"]
+const users = [
+  { name: "Alex", active: true },
+  { name: "Maya", active: false },
+  { name: "Sam", active: true },
+  { name: "Nina", active: false }
+];
+
+const activeUserNames = users
+  .filter((user) => user.active)
+  .map((user) => user.name);
+
+console.log("Active Users:", activeUserNames);
 ```
 
-Try solving it in two steps:
+---
 
-1. `filter` active users
-2. `map` active user names
+## 30-Minute Flow
+
+```text
+5 min  → Explain why arrays matter
+10 min → Teach forEach, map, filter, find
+10 min → Product/student exercises
+5 min  → Active users mini-task
+```
 
 ---
 
 ## Expected Outcome
 
-You can work with arrays of objects and choose the right method for common frontend tasks.
+You can use `forEach`, `map`, `filter`, and `find` to work with users, products, and other frontend lists.
 
 ---
 

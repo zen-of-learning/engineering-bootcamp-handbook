@@ -1,83 +1,339 @@
-# Day 1 — JavaScript Basics, Part 1
+# Day 1 — JavaScript Basics: Variables, Data Types, Console
 
-> **Goal:** Use the browser console, create variables with `let` and `const`, and store simple user data.
+## Goal
+
+Students should learn how to store simple values, print them, and understand basic JavaScript data types.
+
+By the end of the day, students should be able to write:
+
+```js
+const name = "Alex";
+let age = 22;
+
+console.log(name);
+console.log(age);
+```
 
 ---
 
-## Short Explanation
+## Practical Explanation
 
-JavaScript makes webpages interactive. HTML gives a page structure, CSS makes it look good, and JavaScript makes it respond to data and user actions. Today you only need the basics: store values, print them, and understand simple data types. Use `const` when a value should not be reassigned. Use `let` when the value may change later. Skip `var` for this bootcamp. Strings are text, numbers are numeric values, and booleans are `true` or `false`. The browser console is your first practice area because it lets you run code quickly. Open DevTools, go to the Console tab, and type each example yourself. The goal is not memorizing syntax; the goal is getting comfortable writing and reading small pieces of code.
+JavaScript is used to make websites interactive.
+
+HTML gives the page structure.  
+CSS makes the page look good.  
+JavaScript makes the page do things.
+
+Example:
+
+```text
+HTML  → Button exists
+CSS   → Button looks nice
+JS    → Button does something when clicked
+```
+
+In JavaScript, we store data using variables.
+
+Use `const` when the value should stay the same.
+
+```js
+const name = "Alex";
+```
+
+Use `let` when the value can change.
+
+```js
+let score = 0;
+score = 10;
+```
+
+Do not use `var` in this bootcamp. It is older and can confuse beginners.
 
 ---
 
-## Code Examples
+## Core Concepts
+
+### `const`
+
+Use when you do not plan to reassign the variable.
 
 ```js
-const studentName = "Amina";
-let studentAge = 19;
-const isEnrolled = true;
-
-console.log(studentName);
-console.log(studentAge);
-console.log(isEnrolled);
+const appName = "Todo App";
+console.log(appName);
 ```
 
-Use values inside a sentence:
+You cannot do this:
 
 ```js
-const name = "Leo";
-let age = 21;
-const city = "Manila";
-
-console.log(`${name} is ${age} years old and lives in ${city}.`);
-
-age = 22;
-console.log(`${name} is now ${age}.`);
+const appName = "Todo App";
+appName = "Weather App"; // Error
 ```
 
-Store multiple simple values:
+### `let`
+
+Use when the value can change.
 
 ```js
-const firstHobby = "coding";
-const secondHobby = "basketball";
-const thirdHobby = "music";
+let count = 0;
 
-console.log("Hobbies:", firstHobby, secondHobby, thirdHobby);
+count = count + 1;
+count = count + 1;
+
+console.log(count); // 2
+```
+
+---
+
+## Basic Data Types
+
+### String
+
+Text value.
+
+```js
+const name = "Maya";
+const city = "Dallas";
+```
+
+### Number
+
+Used for age, price, score, quantity, etc.
+
+```js
+const age = 25;
+const price = 19.99;
+```
+
+### Boolean
+
+True or false value.
+
+```js
+const isLoggedIn = true;
+const isAdmin = false;
+```
+
+### Undefined
+
+A variable exists, but no value has been assigned.
+
+```js
+let email;
+
+console.log(email); // undefined
+```
+
+### Null
+
+Intentionally empty.
+
+```js
+const selectedUser = null;
+```
+
+Use `null` when you want to clearly say:
+
+> There is no value right now.
+
+---
+
+## Console Usage
+
+The console is used to test your code.
+
+```js
+console.log("Hello JavaScript");
+console.log(10);
+console.log(true);
+```
+
+You can also print labels:
+
+```js
+const name = "Alex";
+const age = 22;
+
+console.log("Name:", name);
+console.log("Age:", age);
+```
+
+---
+
+## Guided Example
+
+Create a user profile.
+
+```js
+const firstName = "Alex";
+const lastName = "Johnson";
+let age = 22;
+const isStudent = true;
+
+console.log("First Name:", firstName);
+console.log("Last Name:", lastName);
+console.log("Age:", age);
+console.log("Student:", isStudent);
+```
+
+Now update the age:
+
+```js
+age = 23;
+
+console.log("Updated Age:", age);
+```
+
+---
+
+## Template Strings
+
+Instead of this:
+
+```js
+console.log(firstName + " is " + age + " years old.");
+```
+
+Use this:
+
+```js
+console.log(`${firstName} is ${age} years old.`);
+```
+
+This is cleaner and commonly used in real projects.
+
+---
+
+## Common Mistakes
+
+### Mistake 1: Reassigning `const`
+
+```js
+const age = 22;
+age = 23; // Error
+```
+
+Use `let` instead:
+
+```js
+let age = 22;
+age = 23;
+```
+
+### Mistake 2: Forgetting quotes for strings
+
+Wrong:
+
+```js
+const name = Alex;
+```
+
+Correct:
+
+```js
+const name = "Alex";
+```
+
+### Mistake 3: Confusing string and number
+
+```js
+const age = "22";
+```
+
+This is a string, not a number.
+
+Better:
+
+```js
+const age = 22;
 ```
 
 ---
 
 ## Exercises
 
-1. Create `const` variables for your name and city, and a `let` variable for your age.
-2. Print one sentence that uses all three variables.
-3. Change the age value and print a second sentence with the updated age.
+### Exercise 1
+
+Create variables for a user:
+
+- `name`
+- `age`
+- `city`
+- `isLoggedIn`
+
+Print each one.
+
+### Exercise 2
+
+Create variables for a product:
+
+- `productName`
+- `price`
+- `inStock`
+- `quantity`
+
+Print a sentence like:
+
+```text
+Laptop costs $1200
+```
+
+### Exercise 3
+
+Create a score counter.
+
+Start with:
+
+```js
+let score = 0;
+```
+
+Then increase it three times.
+
+Expected result:
+
+```text
+Final score: 3
+```
 
 ---
 
 ## Mini-Task
 
-Store and print user data:
+Create and print user data.
 
-- `name`
-- `age`
-- `hobbyOne`
-- `hobbyTwo`
-- `hobbyThree`
+```js
+const userName = "Sam";
+let userAge = 20;
+const userCity = "Austin";
+const isMember = true;
 
-Print a short profile that looks like this:
+console.log("User Profile");
+console.log("Name:", userName);
+console.log("Age:", userAge);
+console.log("City:", userCity);
+console.log("Member:", isMember);
+
+userAge = 21;
+
+console.log(`${userName} is now ${userAge} years old.`);
+```
+
+---
+
+## 30-Minute Flow
 
 ```text
-User: Maya
-Age: 20
-Hobbies: reading, design, cycling
+5 min  → Explain const, let, and data types
+10 min → Code user profile example
+10 min → Exercises
+5 min  → Mini-task review
 ```
 
 ---
 
 ## Expected Outcome
 
-You can open the browser console, create values with `let` and `const`, print useful messages, and explain the difference between strings, numbers, and booleans.
+You can store simple values, print them with useful labels, recognize basic JavaScript data types, and use `const` or `let` correctly.
 
 ---
 

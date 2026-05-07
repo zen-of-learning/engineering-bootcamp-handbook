@@ -1,91 +1,304 @@
-# Day 3 — Control Flow + Functions
+# Day 3 — Control Flow and Functions
 
-> **Goal:** Make decisions with `if/else` and reuse logic with functions.
+## Goal
 
----
-
-## Short Explanation
-
-Apps need decisions. A signup form may reject an empty email. A dashboard may show different messages for active and inactive users. `if/else` lets your code choose what to do. Comparison operators help you ask questions like “is this age greater than or equal to 18?” Functions let you reuse a task instead of writing the same code again. A function can receive input, run logic, and return a result. Normal functions and arrow functions are both common in modern JavaScript. Today, focus on reading them and writing small practical functions.
+Students should learn how to make decisions and reuse code.
 
 ---
 
-## Code Examples
+## Practical Explanation
 
-Control flow:
+Real apps make decisions all the time.
+
+Examples:
+
+- If user is logged in, show dashboard.
+- If cart is empty, show empty cart message.
+- If password is too short, show error.
+- If API fails, show error message.
+
+This is where `if/else` and functions become important.
+
+---
+
+## Comparison Operators
 
 ```js
-const age = 19;
+const age = 18;
+
+console.log(age > 18);  // false
+console.log(age >= 18); // true
+console.log(age === 18); // true
+console.log(age !== 21); // true
+```
+
+Common operators:
+
+```text
+>    greater than
+<    less than
+>=   greater than or equal
+<=   less than or equal
+===  equal value
+!==  not equal value
+```
+
+Use `===` instead of `==`.
+
+---
+
+## If/Else
+
+```js
+const age = 20;
 
 if (age >= 18) {
-  console.log("Access allowed");
+  console.log("User can sign up.");
 } else {
-  console.log("You must be 18 or older");
+  console.log("User is too young.");
 }
 ```
 
-Normal function:
+---
+
+## Multiple Conditions
 
 ```js
-function getGreeting(name) {
-  return `Welcome, ${name}!`;
-}
+const score = 85;
 
-const message = getGreeting("Nora");
-console.log(message);
+if (score >= 90) {
+  console.log("Grade A");
+} else if (score >= 80) {
+  console.log("Grade B");
+} else if (score >= 70) {
+  console.log("Grade C");
+} else {
+  console.log("Needs improvement");
+}
 ```
 
-Arrow function:
+---
+
+## Functions
+
+A function stores reusable logic.
 
 ```js
-const isAdult = (age) => {
-  return age >= 18;
+function greetUser(name) {
+  console.log(`Hello, ${name}`);
+}
+
+greetUser("Alex");
+greetUser("Maya");
+```
+
+---
+
+## Return Values
+
+Use `return` when you want the function to give back a value.
+
+```js
+function add(a, b) {
+  return a + b;
+}
+
+const total = add(5, 3);
+
+console.log(total);
+```
+
+---
+
+## Arrow Functions
+
+Common in modern frontend code.
+
+```js
+const greetUser = (name) => {
+  return `Hello, ${name}`;
 };
 
-console.log(isAdult(16));
-console.log(isAdult(21));
+console.log(greetUser("Sam"));
 ```
 
-Practical validation:
+Short version:
 
 ```js
-function validateAge(name, age) {
+const add = (a, b) => a + b;
+```
+
+---
+
+## Guided Example
+
+Validate user age.
+
+```js
+const validateAge = (age) => {
   if (age >= 18) {
-    return `${name} can create an account.`;
+    return "User can create an account.";
   }
 
-  return `${name} needs permission from a parent or guardian.`;
-}
+  return "User must be at least 18.";
+};
 
-console.log(validateAge("Mina", 17));
+console.log(validateAge(20));
+console.log(validateAge(15));
+```
+
+---
+
+## Another Real-World Example
+
+Validate password length.
+
+```js
+const validatePassword = (password) => {
+  if (password.length >= 8) {
+    return "Password is valid.";
+  }
+
+  return "Password must be at least 8 characters.";
+};
+
+console.log(validatePassword("abc"));
+console.log(validatePassword("strongpass"));
+```
+
+---
+
+## Common Mistakes
+
+### Mistake 1: Using `=` instead of `===`
+
+Wrong:
+
+```js
+if (age = 18) {
+  console.log("Allowed");
+}
+```
+
+Correct:
+
+```js
+if (age === 18) {
+  console.log("Allowed");
+}
+```
+
+### Mistake 2: Forgetting to call the function
+
+```js
+const greet = () => {
+  console.log("Hello");
+};
+
+greet; // Does nothing
+```
+
+Correct:
+
+```js
+greet();
+```
+
+### Mistake 3: Forgetting `return`
+
+Wrong:
+
+```js
+const add = (a, b) => {
+  a + b;
+};
+```
+
+Correct:
+
+```js
+const add = (a, b) => {
+  return a + b;
+};
+```
+
+Or:
+
+```js
+const add = (a, b) => a + b;
 ```
 
 ---
 
 ## Exercises
 
-1. Write an `if/else` statement that checks if a product price is greater than 100.
-2. Write a function named `createWelcomeMessage` that returns a greeting for a user.
-3. Convert a normal `addNumbers` function into an arrow function.
+### Exercise 1
+
+Write a function called `isAdult`.
+
+It should return:
+
+- `Adult`
+- `Minor`
+
+Based on age.
+
+### Exercise 2
+
+Write a function called `getDiscount`.
+
+Rules:
+
+```text
+price >= 100 → "You get 20% discount"
+price >= 50  → "You get 10% discount"
+otherwise    → "No discount"
+```
+
+### Exercise 3
+
+Write an arrow function that takes first name and last name, then returns full name.
 
 ---
 
 ## Mini-Task
 
-Create a function named `validateUserAge` that accepts `name` and `age`.
+Validate signup input.
 
-It should return:
+```js
+const validateSignup = (name, age) => {
+  if (!name) {
+    return "Name is required.";
+  }
 
-- `"Name can sign up"` if the user is 18 or older
-- `"Name cannot sign up yet"` if the user is under 18
+  if (age < 18) {
+    return "User must be at least 18.";
+  }
 
-Call the function with three different users and print the results.
+  return "Signup successful.";
+};
+
+console.log(validateSignup("Alex", 22));
+console.log(validateSignup("", 22));
+console.log(validateSignup("Sam", 15));
+```
+
+---
+
+## 30-Minute Flow
+
+```text
+5 min  → Explain if/else and comparisons
+10 min → Function examples
+10 min → Exercises
+5 min  → Signup validation mini-task
+```
 
 ---
 
 ## Expected Outcome
 
-You can write simple decision logic, create reusable functions, return values, and use functions for real validation tasks.
+You can compare values, write `if/else` decisions, create reusable functions, return results, and validate basic signup input.
 
 ---
 
