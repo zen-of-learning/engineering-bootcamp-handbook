@@ -383,6 +383,43 @@
       border: 1px solid var(--color-border-default);
     }
 
+
+
+    /* ── Course cards ── */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .course-card {
+      background: linear-gradient(180deg, rgba(88,166,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(88, 166, 255, 0.22);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .course-card h2 { margin-top: 0; }
+
+    .course-badge {
+      color: var(--color-success-fg);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .nav-section-label {
+      color: var(--color-fg-subtle);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 0.75rem 0.625rem 0.25rem;
+      text-transform: uppercase;
+    }
+
     /* ── Footer ── */
     .site-footer {
       border-top: 1px solid var(--color-border-default);
@@ -436,7 +473,8 @@
       <div class="sidebar-title">📚 Handbook</div>
       <nav>
         <ul>
-          <li><a href="{{ site.baseurl }}/"{% if page.url == "/" or page.url == "/index.html" %} class="active"{% endif %}>🏠 Home</a></li>
+          <li><a href="{{ site.baseurl }}/"{% if page.url == "/" or page.url == "/index.html" %} class="active"{% endif %}>🏠 Course Home</a></li>
+          <li class="nav-section-label">Backend Handbook</li>
           <li><a href="{{ site.baseurl }}/part-1-development-environment"{% if page.url contains "part-1" %} class="active"{% endif %}>🔧 Part 1 — Development Environment</a></li>
           <li><a href="{{ site.baseurl }}/part-2-backend-fastapi"{% if page.url contains "part-2" %} class="active"{% endif %}>⚡ Part 2 — Backend: FastAPI</a></li>
           <li><a href="{{ site.baseurl }}/part-3-virtualenv-api-testing"{% if page.url contains "part-3" %} class="active"{% endif %}>🐍 Part 3 — Virtualenv & Testing</a></li>
@@ -446,6 +484,21 @@
           <li><a href="{{ site.baseurl }}/part-7-advanced-git"{% if page.url contains "part-7" %} class="active"{% endif %}>🌿 Part 7 — Advanced Git</a></li>
           <li><a href="{{ site.baseurl }}/part-8-full-project"{% if page.url contains "part-8" %} class="active"{% endif %}>🏗️ Part 8 — Full Project</a></li>
           <li><a href="{{ site.baseurl }}/part-9-final-evaluation"{% if page.url contains "part-9" %} class="active"{% endif %}>🎯 Part 9 — Final Evaluation</a></li>
+          <li class="nav-section-label">JavaScript Bootcamp</li>
+          <li><a href="{{ site.baseurl }}/javascript/"{% if page.url == "/javascript/" or page.url == "/javascript/index.html" %} class="active"{% endif %}>🟨 Overview</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-1"{% if page.url contains "/javascript/day-1" %} class="active"{% endif %}>Day 1 — Basics I</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-2"{% if page.url contains "/javascript/day-2" %} class="active"{% endif %}>Day 2 — Basics II</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-3"{% if page.url contains "/javascript/day-3" %} class="active"{% endif %}>Day 3 — Functions</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-4"{% if page.url contains "/javascript/day-4" %} class="active"{% endif %}>Day 4 — Arrays</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-5"{% if page.url contains "/javascript/day-5" %} class="active"{% endif %}>Day 5 — Objects</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-6"{% if page.url contains "/javascript/day-6" %} class="active"{% endif %}>Day 6 — DOM Basics</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-7"{% if page.url contains "/javascript/day-7" %} class="active"{% endif %}>Day 7 — DOM Manipulation</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-8"{% if page.url contains "/javascript/day-8" %} class="active"{% endif %}>Day 8 — Events</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-9"{% if page.url contains "/javascript/day-9" %} class="active"{% endif %}>Day 9 — Forms</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-10"{% if page.url contains "/javascript/day-10" %} class="active"{% endif %}>Day 10 — Async JS</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-11"{% if page.url contains "/javascript/day-11" %} class="active"{% endif %}>Day 11 — API + UI</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-12"{% if page.url contains "/javascript/day-12" %} class="active"{% endif %}>Day 12 — Clean Code</a></li>
+          <li><a href="{{ site.baseurl }}/javascript/day-13-14"{% if page.url contains "/javascript/day-13-14" %} class="active"{% endif %}>Day 13–14 — Final Project</a></li>
         </ul>
       </nav>
     </aside>
