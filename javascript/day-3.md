@@ -86,6 +86,7 @@ Call the function with three different users and print the results.
 ## Expected Outcome
 
 You can write simple decision logic, create reusable functions, return values, and use functions for real validation tasks.
+
 ---
 
 ## Navigation

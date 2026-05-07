@@ -93,6 +93,7 @@ Requirements:
 ## Expected Outcome
 
 You can turn API data into visible UI and handle the basic states real frontend apps need.
+
 ---
 
 ## Navigation

@@ -118,6 +118,7 @@ Requirements:
 ## Expected Outcome
 
 You can organize a small frontend project so another developer can understand, run, and improve it.
+
 ---
 
 ## Navigation

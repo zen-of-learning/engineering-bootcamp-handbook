@@ -88,6 +88,7 @@ Try solving it in two steps:
 ## Expected Outcome
 
 You can work with arrays of objects and choose the right method for common frontend tasks.
+
 ---
 
 ## Navigation

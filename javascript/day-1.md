@@ -78,6 +78,7 @@ Hobbies: reading, design, cycling
 ## Expected Outcome
 
 You can open the browser console, create values with `let` and `const`, print useful messages, and explain the difference between strings, numbers, and booleans.
+
 ---
 
 ## Navigation

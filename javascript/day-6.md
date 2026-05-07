@@ -73,6 +73,7 @@ Use JavaScript to display dynamic text about a user in the empty `div`.
 ## Expected Outcome
 
 You can connect a JavaScript file to an HTML page, select elements, and update visible content in the browser.
+
 ---
 
 ## Navigation

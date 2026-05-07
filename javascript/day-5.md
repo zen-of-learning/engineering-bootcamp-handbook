@@ -86,6 +86,7 @@ Bonus: filter products cheaper than `$50` and print only those products.
 ## Expected Outcome
 
 You can model real app data with objects, update values, read nested properties, and work with arrays of objects.
+
 ---
 
 ## Navigation

@@ -86,6 +86,7 @@ Requirements:
 ## Expected Outcome
 
 You can create DOM elements from data and render a small UI from an array of objects.
+
 ---
 
 ## Navigation

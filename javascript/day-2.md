@@ -85,6 +85,7 @@ Then print:
 ## Expected Outcome
 
 You can choose between arrays and objects, read values from both, and recognize basic data shapes used in frontend apps and APIs.
+
 ---
 
 ## Navigation

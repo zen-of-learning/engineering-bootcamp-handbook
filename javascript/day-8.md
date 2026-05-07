@@ -78,6 +78,7 @@ Requirements:
 ## Expected Outcome
 
 You can connect user actions to JavaScript and update the page based on clicks and typed input.
+
 ---
 
 ## Navigation

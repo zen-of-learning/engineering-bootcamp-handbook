@@ -93,6 +93,7 @@ Requirements:
 ## Expected Outcome
 
 You can call an API from the browser, wait for the response, read JSON, and handle basic errors.
+
 ---
 
 ## Navigation
