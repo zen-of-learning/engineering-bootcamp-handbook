@@ -2,7 +2,7 @@
 
 A practical multi-course engineering handbook for backend and JavaScript/frontend bootcamp students.
 
-Published as a GitHub Pages documentation site at **[https://indapmgr.github.io/engineering-bootcamp-handbook/](https://indapmgr.github.io/engineering-bootcamp-handbook/)**.
+Published as a GitHub Pages documentation site at **[https://zen-of-learning.github.io/engineering-bootcamp-handbook/](https://zen-of-learning.github.io/engineering-bootcamp-handbook/)**.
 
 ---
 
